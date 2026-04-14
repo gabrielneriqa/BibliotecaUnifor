@@ -22,7 +22,7 @@
         android:id="@+id/txtTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Bem-vindo ao UniEventos"
+        android:text="Bem-vindo a Biblioteca Unifor"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
         android:fontFamily="@font/poppins_bold"
