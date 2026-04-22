@@ -19,8 +19,8 @@ class OnboardingThreeActivity : AppCompatActivity() {
 
         val btnStart = findViewById<Button>(R.id.btnStart)
         btnStart.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            startActivity(Intent(this, LivrosReservadosActivity::class.java))
+            finishAffinity()
         }
     }
 }
