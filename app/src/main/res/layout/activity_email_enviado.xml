@@ -8,73 +8,16 @@
     android:background="#F7F7F7"
     tools:context=".EmailEnviadoActivity">
 
-    <TextView
-        android:id="@+id/tvHora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="9:41"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/layoutStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:layout_width="4dp"
-            android:layout_height="10dp"
-            android:layout_marginEnd="3dp"
-            android:background="#000000" />
-
-        <View
-            android:layout_width="4dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="3dp"
-            android:background="#000000" />
-
-        <View
-            android:layout_width="4dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="8dp"
-            android:background="#000000" />
-
-        <ImageView
-            android:id="@+id/ivWifi"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="8dp"
-            android:src="@android:drawable/stat_sys_wifi"
-            app:tint="#000000" />
-
-        <View
-            android:layout_width="26dp"
-            android:layout_height="14dp"
-            android:background="@drawable/bg_bateria_preta" />
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/ivVoltar"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
         android:contentDescription="Voltar"
         android:src="@android:drawable/ic_media_previous"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvHora"
-        app:tint="#000000" />
+        app:tint="#000000"
+        tools:layout_editor_absoluteY="84dp" />
 
     <TextView
         android:id="@+id/tvTituloTopo"

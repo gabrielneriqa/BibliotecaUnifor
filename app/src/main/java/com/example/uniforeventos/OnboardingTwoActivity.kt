@@ -12,16 +12,21 @@ class OnboardingTwoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding_two)
 
-        // BOTÃO VOLTAR (AGORA FUNCIONA)
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        val btnNext = findViewById<Button>(R.id.btnNext)
+        val btnSkip = findViewById<Button>(R.id.btnSkip)
+
         btnBack.setOnClickListener {
             finish()
         }
 
-        // BOTÃO PRÓXIMO
-        val btnNext = findViewById<Button>(R.id.btnNext)
         btnNext.setOnClickListener {
             startActivity(Intent(this, OnboardingThreeActivity::class.java))
+        }
+
+        btnSkip.setOnClickListener {
+            startActivity(Intent(this, LivrosReservadosActivity::class.java))
+            finishAffinity()
         }
     }
 }

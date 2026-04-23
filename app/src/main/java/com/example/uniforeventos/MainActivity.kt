@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.jvm.java
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,11 +14,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-
-            // TROCA AQUI
-            startActivity(Intent(this, OnboardingOneActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
-
         }, 2000)
     }
 }
