@@ -12,9 +12,15 @@ class OnboardingOneActivity : AppCompatActivity() {
         setContentView(R.layout.activity_onboarding_one)
 
         val btnNext = findViewById<Button>(R.id.btnNext)
+        val btnSkip = findViewById<Button>(R.id.btnSkip)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this, OnboardingTwoActivity::class.java))
+        }
+
+        btnSkip.setOnClickListener {
+            startActivity(Intent(this, LivrosReservadosActivity::class.java))
+            finishAffinity()
         }
     }
 }
