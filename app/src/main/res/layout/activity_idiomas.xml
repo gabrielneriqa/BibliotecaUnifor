@@ -17,9 +17,9 @@
         android:contentDescription="Voltar"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_arrow_back"
-        android:tint="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#000000" />
 
     <TextView
         android:id="@+id/tvTitulo"
