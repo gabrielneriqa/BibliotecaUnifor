@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            // 🔥 TROCA AQUI
-            startActivity(Intent(this, LivrosReservadosActivity::class.java))
+            // TROCA AQUI
+            startActivity(Intent(this, OnboardingOneActivity::class.java))
             finish()
 
         }, 2000)
