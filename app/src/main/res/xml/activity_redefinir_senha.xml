@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainEsqueciSenha"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    tools:context=".EsqueciSenhaActivity">
+
+    <TextView
+        android:id="@+id/tvHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="9:41"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="10dp"
+            android:layout_marginEnd="3dp"
+            android:background="#000000" />
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="3dp"
+            android:background="#000000" />
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="8dp"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/ivWifi"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="8dp"
+            android:src="@android:drawable/stat_sys_wifi"
+            app:tint="#000000" />
+
+        <View
+            android:layout_width="26dp"
+            android:layout_height="14dp"
+            android:background="@drawable/bg_bateria_preta" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivVoltar"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:contentDescription="Voltar"
+        android:src="@android:drawable/ic_media_previous"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHora"
+        app:tint="#000000" />
+
+    <TextView
+        android:id="@+id/tvTituloTopo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Esqueci a senha"
+        android:textColor="#0F1230"
+        android:textSize="28sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@id/ivVoltar"
+        app:layout_constraintStart_toEndOf="@id/ivVoltar"
+        app:layout_constraintTop_toTopOf="@id/ivVoltar" />
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="88dp"
+        android:text="Redefinir senha"
+        android:textColor="#121533"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivVoltar" />
+
+    <TextView
+        android:id="@+id/tvDescricao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="36dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Insira seu endereço de e-mail para solicitar a redefinição da sua senha."
+        android:textColor="#8D90AA"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
+
+    <LinearLayout
+        android:id="@+id/layoutEmail"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_input_email"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescricao">
+
+        <ImageView
+            android:id="@+id/ivEmail"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@android:drawable/ic_dialog_email"
+            app:tint="#8E8A8B" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="abc@email.com"
+            android:inputType="textEmailAddress"
+            android:textColor="#6D7088"
+            android:textColorHint="#8D90AA"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnRedefinir"
+        android:layout_width="264dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="52dp"
+        android:background="@drawable/bg_botao_redefinir"
+        android:gravity="center"
+        android:letterSpacing="0.08"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="REDEFINIR        →"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutEmail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
