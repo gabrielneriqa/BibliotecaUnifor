@@ -1,13 +1,12 @@
-package com.example.uniforeventos.ui.theme
+package com.example.uniforeventos
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
-import com.example.uniforeventos.R
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 
 class CancelarEventoActivity : AppCompatActivity() {

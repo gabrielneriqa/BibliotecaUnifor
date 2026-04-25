@@ -8,7 +8,7 @@
     <FrameLayout
         android:id="@+id/topImageContainer"
         android:layout_width="0dp"
-        android:layout_height="225dp"
+        android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Confirmar presença"
+        android:text="Detalhes do evento"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/ivVoltar"
@@ -74,7 +74,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <ScrollView
-        android:id="@+id/scrollContent"
+        android:id="@+id/scrollDetalhes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingStart="22dp"
-            android:paddingTop="14dp"
+            android:paddingTop="16dp"
             android:paddingEnd="22dp"
             android:paddingBottom="24dp">
 
@@ -99,7 +99,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="Inovação: futuro com IA"
                 android:textColor="#1F1F2E"
-                android:textSize="17sp" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -225,7 +225,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Unifor"
+                        android:text="Professora Ana"
                         android:textColor="#2E2E40"
                         android:textSize="15sp" />
 
@@ -241,62 +241,68 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvPerguntaConfirmacao"
+                android:id="@+id/tvSobreTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="52dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Deseja confirmar sua presença"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Sobre o evento"
                 android:textColor="#2E2E40"
                 android:textSize="16sp" />
 
-            <LinearLayout
-                android:id="@+id/layoutBotoesAcao"
+            <TextView
+                android:id="@+id/tvDescricaoEvento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/poppins_regular"
+                android:lineSpacingExtra="2dp"
+                android:textColor="#8B8FA8"
+                android:textSize="14sp" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnCancelar"
-                    android:layout_width="118dp"
-                    android:layout_height="44dp"
-                    android:layout_marginEnd="8dp"
-                    app:cardBackgroundColor="#DCE6FF"
-                    app:cardCornerRadius="22dp"
-                    app:cardElevation="0dp">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnConfirmarPresenca"
+                android:layout_width="240dp"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                app:cardBackgroundColor="#FF7D7D"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center"
-                        android:text="Cancelar"
-                        android:textColor="#356BDE"
-                        android:textSize="14sp" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnConfirmar"
-                    android:layout_width="118dp"
-                    android:layout_height="44dp"
-                    android:layout_marginStart="8dp"
-                    app:cardBackgroundColor="#3F7BFA"
-                    app:cardCornerRadius="22dp"
-                    app:cardElevation="0dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins_regular"
-                        android:gravity="center"
-                        android:text="Sim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:letterSpacing="0.08"
+                        android:text="CONFIRMAR PRESENÇA"
                         android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-                </com.google.android.material.card.MaterialCardView>
-            </LinearLayout>
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="8dp"
+                        app:cardBackgroundColor="#FFA4A4"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Avançar"
+                            app:srcCompat="@android:drawable/ic_media_next"
+                            app:tint="#FFFFFF" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>
@@ -333,7 +339,8 @@
             android:layout_width="1dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF" />
+            android:background="#80FFFFFF"
+            />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -353,7 +360,8 @@
             android:layout_width="1dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF" />
+            android:background="#80FFFFFF"
+            />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -373,7 +381,8 @@
             android:layout_width="1dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF" />
+            android:background="#80FFFFFF"
+            />
 
         <LinearLayout
             android:layout_width="0dp"
