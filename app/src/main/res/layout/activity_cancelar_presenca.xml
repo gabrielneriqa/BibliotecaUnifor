@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F4F6">
@@ -19,7 +20,7 @@
             android:layout_height="match_parent"
             android:contentDescription="Imagem do evento"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_evento_placeholder" />
+            tools:src="@drawable/img_evento_placeholder" />
 
         <View
             android:layout_width="match_parent"
@@ -44,8 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Confirmar presença"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Cancelar presença"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/ivVoltar"
@@ -97,9 +98,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Inovação: futuro com IA"
+                android:text=""
                 android:textColor="#1F1F2E"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                tools:text="Inovação: futuro com IA" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,18 +137,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="10 de Abril, 2026"
+                        android:text=""
                         android:textColor="#3D3D53"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        tools:text="10 de Abril, 2026" />
 
                     <TextView
                         android:id="@+id/tvHorarioEvento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Sexta-feira, 16h - 17h"
+                        android:text=""
                         android:textColor="#8B8FA8"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        tools:text="Sexta-feira, 16h - 17h" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -183,19 +187,21 @@
                         android:id="@+id/tvLocalEvento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Teatro Celina Queiroz"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text=""
                         android:textColor="#2E2E40"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        tools:text="Teatro Celina Queiroz" />
 
                     <TextView
                         android:id="@+id/tvEnderecoEvento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Av. Washington Soares, 1321"
+                        android:text=""
                         android:textColor="#8B8FA8"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        tools:text="Av. Washington Soares, 1321" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -212,7 +218,7 @@
                     android:layout_height="38dp"
                     android:contentDescription="Organizador"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/img_avatar_1" />
+                    tools:src="@drawable/img_avatar_1" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -224,38 +230,55 @@
                         android:id="@+id/tvNomeOrganizador"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Unifor"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text=""
                         android:textColor="#2E2E40"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        tools:text="Unifor" />
 
                     <TextView
                         android:id="@+id/tvCargoOrganizador"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Organizador"
+                        android:text=""
                         android:textColor="#8B8FA8"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        tools:text="Organizador" />
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvPerguntaConfirmacao"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvPerguntaCancelamento"
+                android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="52dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Deseja confirmar sua presença"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="Tem certeza que deseja&#10;cancelar sua presença?"
+                android:textAlignment="center"
                 android:textColor="#2E2E40"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvAvisoCancelamento"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="Ao cancelar, sua vaga poderá ser liberada.&#10;Se voltar atrás depois, talvez não haja mais vagas disponíveis."
+                android:textAlignment="center"
+                android:textColor="#B0B0BB"
+                android:textSize="9sp" />
 
             <LinearLayout
                 android:id="@+id/layoutBotoesAcao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 

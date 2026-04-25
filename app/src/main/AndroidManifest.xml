@@ -31,6 +31,7 @@
         <activity android:name=".OnboardingThreeActivity" />
         <activity android:name=".LivrosReservadosActivity" />
         <activity android:name=".IdiomasActivity" />
+        <activity android:name=".DetalhesEventoActivity" />
 
     </application>
 
