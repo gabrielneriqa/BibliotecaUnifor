@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <!-- STATUS BAR VISUAL -->
+        <RelativeLayout
+            android:id="@+id/statusBarFake"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#FFFFFF"
+            android:paddingStart="32dp"
+            android:paddingEnd="18dp">
+
+            <TextView
+                android:id="@+id/tvHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="9:41"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/statusIcons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="12dp"
+                    android:contentDescription="Sinal"
+                    android:src="@drawable/ic_status_signal" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="4dp"
+                    android:contentDescription="Wi-Fi"
+                    android:src="@drawable/ic_status_wifi" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="4dp"
+                    android:contentDescription="Bateria"
+                    android:src="@drawable/ic_status_battery" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- CONTEÚDO DA TELA -->
+        <RelativeLayout
+            android:id="@+id/contentNotificacao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottomNav"
+            android:layout_below="@id/statusBarFake"
+            android:background="#FFFFFF"
+            android:paddingStart="24dp"
+            android:paddingTop="30dp"
+            android:paddingEnd="24dp">
+
+            <!-- TÍTULO -->
+            <TextView
+                android:id="@+id/tvTituloNotificacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notificação"
+                android:textColor="#111827"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <!-- BOTÃO DE TRÊS PONTOS -->
+            <FrameLayout
+                android:id="@+id/btnMaisOpcoes"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/tvTituloNotificacao"
+                android:layout_marginTop="-6dp"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <View
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_menu_check" />
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="⋮"
+                    android:textColor="#5966FF"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <!-- ESTADO VAZIO -->
+            <LinearLayout
+                android:id="@+id/emptyStateContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="70dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- ILUSTRAÇÃO -->
+                <FrameLayout
+                    android:layout_width="180dp"
+                    android:layout_height="180dp">
+
+                    <ImageView
+                        android:id="@+id/imgEmptyNotification"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="Sem notificações"
+                        android:src="@drawable/ic_empty_notifications" />
+
+                    <TextView
+                        android:id="@+id/tvBadgeZero"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="35dp"
+                        android:background="@drawable/bg_badge_zero"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvSemNotificacoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Sem notificações!"
+                    android:textColor="#2E4568"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDescricaoSemNotificacoes"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Você ainda não tem notificações.&#10;Quando houver novidades, avisaremos&#10;você por aqui."
+                    android:textColor="#7A8CA8"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- BOTTOM NAV -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_gradient"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_nav_menu" />
+
+    </RelativeLayout>
+
+    <!-- SIDEBAR PRONTA (VISUAL) -->
+    <LinearLayout
+        android:id="@+id/sidebarMenu"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textColor="#2B2B2B"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Início"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Meus livros"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Reservas"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Perfil"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

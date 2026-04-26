@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <!-- STATUS BAR VISUAL -->
+        <RelativeLayout
+            android:id="@+id/statusBarFake"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#FFFFFF"
+            android:paddingStart="32dp"
+            android:paddingEnd="18dp">
+
+            <TextView
+                android:id="@+id/tvHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="9:41"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/statusIcons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="12dp"
+                    android:contentDescription="Sinal"
+                    android:src="@drawable/ic_status_signal" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="4dp"
+                    android:contentDescription="Wi-Fi"
+                    android:src="@drawable/ic_status_wifi" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="4dp"
+                    android:contentDescription="Bateria"
+                    android:src="@drawable/ic_status_battery" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- CONTEÚDO DA NOTIFICAÇÃO -->
+        <RelativeLayout
+            android:id="@+id/contentNotificacao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottomNav"
+            android:layout_below="@id/statusBarFake"
+            android:background="#FFFFFF"
+            android:paddingStart="24dp"
+            android:paddingTop="30dp"
+            android:paddingEnd="24dp">
+
+            <!-- TÍTULO -->
+            <TextView
+                android:id="@+id/tvTituloNotificacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notificação"
+                android:textColor="#111827"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <!-- BOTÃO DE TRÊS PONTOS SEM CORTAR -->
+            <FrameLayout
+                android:id="@+id/btnMaisOpcoes"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/tvTituloNotificacao"
+                android:layout_marginTop="-6dp"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <View
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_menu_dots" />
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="⋮"
+                    android:textColor="#5966FF"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <!-- LINHA DA NOTIFICAÇÃO -->
+            <RelativeLayout
+                android:id="@+id/notificationRow"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_below="@id/tvTituloNotificacao"
+                android:layout_marginTop="45dp">
+
+                <!-- IMAGEM REDONDA -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardAvatar"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    app:cardBackgroundColor="#FFD43B"
+                    app:cardCornerRadius="23dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/imgAvatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Imagem do usuário"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/foto_notificacao" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- CÍRCULO DA DIREITA -->
+                <View
+                    android:id="@+id/circleStatus"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/cardAvatar"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_circle_unchecked" />
+
+                <!-- TEXTO DA NOTIFICAÇÃO -->
+                <LinearLayout
+                    android:id="@+id/textNotificationContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/cardAvatar"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_toEndOf="@id/cardAvatar"
+                    android:layout_toStartOf="@id/circleStatus"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="O evento "
+                            android:textColor="#3C3C5A"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cidades"
+                            android:textColor="#111827"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Inteligentes"
+                            android:textColor="#111827"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" foi cancelado"
+                            android:textColor="#3C3C5A"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- LINHA ABAIXO DA NOTIFICAÇÃO -->
+            <View
+                android:id="@+id/dividerNotification"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/notificationRow"
+                android:layout_marginStart="-24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="-24dp"
+                android:background="#EEEEEE" />
+
+        </RelativeLayout>
+
+        <!-- BOTTOM NAV -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_gradient"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_nav_menu" />
+
+    </RelativeLayout>
+
+    <!-- SIDEBAR PRONTA (VISUAL) -->
+    <LinearLayout
+        android:id="@+id/sidebarMenu"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textColor="#2B2B2B"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Início"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Meus livros"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Reservas"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Perfil"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
