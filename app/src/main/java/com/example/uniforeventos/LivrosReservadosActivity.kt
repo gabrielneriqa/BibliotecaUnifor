@@ -1,6 +1,8 @@
 package com.example.uniforeventos
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -12,5 +14,10 @@ class LivrosReservadosActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_books
+
+        val btnEstender = findViewById<TextView>(R.id.btnEstenderEmprestimo)
+        btnEstender.setOnClickListener {
+            startActivity(Intent(this, EstenderEmprestimoActivity::class.java))
+        }
     }
 }
