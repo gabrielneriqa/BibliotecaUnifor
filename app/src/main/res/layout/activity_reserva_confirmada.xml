@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <!-- HEADER AZUL -->
+        <LinearLayout
+            android:id="@+id/headerTop"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:background="@drawable/bg_header"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="24dp">
+
+            <!-- STATUS BAR -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp">
+
+                <TextView
+                    android:id="@+id/tvHora"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="9:41"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="12dp"
+                        android:contentDescription="Sinal"
+                        android:src="@drawable/ic_status_signal"
+                        android:tint="#FFFFFF" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="4dp"
+                        android:contentDescription="Wi-Fi"
+                        android:src="@drawable/ic_status_wifi"
+                        android:tint="#FFFFFF" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="4dp"
+                        android:contentDescription="Bateria"
+                        android:src="@drawable/ic_status_battery"
+                        android:tint="#FFFFFF" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- TÍTULO + FAVORITO -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp">
+
+                <LinearLayout
+                    android:id="@+id/backTitleContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/btnVoltarHeader"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="Voltar"
+                        android:src="@drawable/ic_arrow_back"
+                        android:tint="#FFFFFF" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Detalhes do livro"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/btnFavorito"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_bookmark_button">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="Favoritar"
+                        android:src="@drawable/ic_bookmark_outline"
+                        android:tint="#FA7272" />
+
+                </FrameLayout>
+
+            </RelativeLayout>
+
+            <!-- CAPA DO LIVRO -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgLivro"
+                android:layout_width="140dp"
+                android:layout_height="190dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:contentDescription="Capa do livro"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mysql"
+                app:shapeAppearanceOverlay="@style/RoundedBookCoverLarge" />
+
+        </LinearLayout>
+
+        <!-- CONTEÚDO -->
+        <LinearLayout
+            android:id="@+id/contentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/headerTop"
+            android:layout_above="@id/bottomNav"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="10dp">
+
+            <!-- TÍTULO DO LIVRO -->
+            <TextView
+                android:id="@+id/tvTituloLivro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sistemas de Banco de Dados"
+                android:textColor="#1D1B34"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSubInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Código: 023B23 | Categoria: Tecnologia da informação"
+                android:textColor="#6B6B7A"
+                android:textSize="10sp" />
+
+            <!-- AUTOR -->
+            <LinearLayout
+                android:id="@+id/authorContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="Professora"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/autor"
+                    app:shapeAppearanceOverlay="@style/RoundedAvatarSmall" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Professora Ana"
+                        android:textColor="#1D1B34"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Autor"
+                        android:textColor="#8B86A0"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- BLOCO DE CONFIRMAÇÃO -->
+            <LinearLayout
+                android:id="@+id/confirmationContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvReservaConfirmada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Reserva confirmada!"
+                    android:textAlignment="center"
+                    android:textColor="#1D1B34"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMensagemReserva"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="2dp"
+                    android:text="Você tem até 24h para&#10;retirar o livro na biblioteca.&#10;Após esse prazo, a reserva poderá ser cancelada."
+                    android:textAlignment="center"
+                    android:textColor="#76759A"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- BOTÃO VOLTAR MAIS PARA CIMA -->
+            <TextView
+                android:id="@+id/btnVoltar"
+                android:layout_width="170dp"
+                android:layout_height="54dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_button_voltar"
+                android:gravity="center"
+                android:text="Voltar"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- MENU INFERIOR -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_gradient"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_nav_menu" />
+
+    </RelativeLayout>
+
+    <!-- SIDEBAR PRONTA -->
+    <LinearLayout
+        android:id="@+id/sidebarMenu"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textColor="#2B2B2B"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Início"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Meus livros"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Reservas"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Perfil"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
