@@ -12,10 +12,10 @@ class EmailEnviadoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_email_enviado)
 
-        val ivVoltar = findViewById<ImageView>(R.id.ivVoltar)
+        val btnVoltar = findViewById<ImageView>(R.id.btnVoltar)
         val btnAbrirEmail = findViewById<TextView>(R.id.btnAbrirEmail)
 
-        ivVoltar.setOnClickListener {
+        btnVoltar.setOnClickListener {
             finish()
         }
 
