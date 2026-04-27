@@ -32,6 +32,9 @@
         <activity android:name=".LivrosReservadosActivity" />
         <activity android:name=".IdiomasActivity" />
         <activity android:name=".DetalhesEventoActivity" />
+        <activity android:name=".CancelarEventoActivity" />
+        <activity android:name=".CreateEventActivity" />
+        <activity android:name=".ListaEventosActivity" />
 
     </application>
 

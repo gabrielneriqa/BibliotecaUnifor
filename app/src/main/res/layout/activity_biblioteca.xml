@@ -369,7 +369,7 @@
                             android:layout_height="125dp"
                             android:contentDescription="Capa do livro"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/Storytelling"
+                            android:src="@drawable/storytelling"
                             app:shapeAppearanceOverlay="@style/RoundedBookCover" />
 
                         <LinearLayout
