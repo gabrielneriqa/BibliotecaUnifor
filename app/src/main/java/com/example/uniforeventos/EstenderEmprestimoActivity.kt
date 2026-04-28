@@ -1,5 +1,6 @@
 package com.example.uniforeventos
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
@@ -60,6 +62,35 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         }
 
         btnConfirmar.setOnClickListener { confirmarExtensao() }
+
+        configurarBottomNav()
+    }
+
+    private fun configurarBottomNav() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_books
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.nav_notifications -> {
+                    Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.nav_books -> {
+                    startActivity(Intent(this, LivrosReservadosActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     // ─── Lógica de seleção de período ───────────────────────────────────────
@@ -70,35 +101,23 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         val e = endDate
 
         when {
-            // Período já completo ou clicou no início → reinicia seleção
             e != null || date == s -> {
                 startDate = date
                 endDate = null
             }
-
-            // Nenhuma data selecionada ainda
             s == null -> {
                 startDate = date
             }
-
-            // Clicou antes do início → novo início
             date.isBefore(s) -> {
                 startDate = date
                 endDate = null
             }
-
-            // Clicou após o início → tenta fechar o período
             else -> {
                 val temReservadoNoMeio = reservedDates.any { reserved ->
                     reserved.isAfter(s) && reserved.isBefore(date)
                 }
-
                 if (temReservadoNoMeio) {
-                    Toast.makeText(
-                        this,
-                        "O período contém datas reservadas",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "O período contém datas reservadas", Toast.LENGTH_SHORT).show()
                 } else {
                     endDate = date
                 }
@@ -137,9 +156,9 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         for (num in 1..yearMonth.lengthOfMonth()) {
             val date = yearMonth.atDay(num)
 
-            val isStart  = date == startDate
-            val isEnd    = date == endDate
-            val inRange  = startDate != null && endDate != null
+            val isStart = date == startDate
+            val isEnd   = date == endDate
+            val inRange = startDate != null && endDate != null
                     && date.isAfter(startDate) && date.isBefore(endDate)
 
             days.add(

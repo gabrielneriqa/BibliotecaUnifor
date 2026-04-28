@@ -25,7 +25,7 @@ class OnboardingTwoActivity : AppCompatActivity() {
         }
 
         btnSkip.setOnClickListener {
-            startActivity(Intent(this, LivrosReservadosActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
             finishAffinity()
         }
     }

@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
             val matricula = etMatricula.text.toString().trim()
             val senha = etSenha.text.toString().trim()
 
-            if (matricula == "20240001" && senha == "123456") {
+            if (matricula == "1" && senha == "123") {
                 startActivity(Intent(this, OnboardingOneActivity::class.java))
                 finish()
             } else {

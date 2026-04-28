@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ListaEventosActivity : AppCompatActivity() {
 
     private lateinit var recyclerViewEventos: RecyclerView
-    private lateinit var eventoAdapter: EventoAdapter
+    private lateinit var eventoAdapter: EventoHomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class ListaEventosActivity : AppCompatActivity() {
     }
 
     private fun configurarRecyclerView() {
-        eventoAdapter = EventoAdapter(
+        eventoAdapter = EventoHomeAdapter(
             aoClicarNoEvento = { eventoSelecionado ->
                 DetalhesEventoActivity.abrir(this, eventoSelecionado)
             },
