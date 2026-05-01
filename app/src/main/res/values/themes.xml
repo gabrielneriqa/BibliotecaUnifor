@@ -25,6 +25,12 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">999dp</item>
     </style>
+
+    <style name="ThemeOverlay.App.CalendarView" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorControlActivated">@color/black</item>
+    </style>
+
     <style name="CalendarWeekDay">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">28dp</item>

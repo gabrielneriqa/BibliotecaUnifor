@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         configurarEventos()
         configurarLivros()
         configurarBottomNav()
+        configurarFiltros()
     }
 
     private fun configurarHamburger() {
@@ -121,6 +122,13 @@ class HomeActivity : AppCompatActivity() {
         )
         rv.adapter = adapter
         adapter.submitList(eventos)
+    }
+
+    private fun configurarFiltros(){
+        var filter = findViewById<View>(R.id.btnFiltros)
+        filter.setOnClickListener {
+            startActivity(Intent(this, FilterActivity::class.java))
+        }
     }
 
     private fun configurarLivros() {
