@@ -61,7 +61,8 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Widget.AppCompat.CalendarView" />
+            android:firstDayOfWeek="1"
+            android:theme="@style/ThemeOverlay.App.CalendarView" />
 
     </com.google.android.material.card.MaterialCardView>
 
