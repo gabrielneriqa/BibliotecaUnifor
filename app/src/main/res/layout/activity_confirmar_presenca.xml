@@ -1,48 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F3F5">
+    android:background="#F4F4F6">
 
-    <View
-        android:id="@+id/topSection"
+    <FrameLayout
+        android:id="@+id/topImageContainer"
         android:layout_width="0dp"
-        android:layout_height="212dp"
-        android:background="#5966FF"
+        android:layout_height="225dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivImagemEvento"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Imagem do evento"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_evento_placeholder" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#33000000" />
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivBack"
+        android:id="@+id/ivVoltar"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="44dp"
         android:contentDescription="Voltar"
-        android:fontFamily="@font/poppins_bold"
-        app:srcCompat="@android:drawable/ic_media_previous"
-        app:tint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_media_previous"
+        app:tint="#FFFFFF" />
 
     <TextView
-        android:id="@+id/tvTelaTitulo"
+        android:id="@+id/tvTituloTela"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:fontFamily="@font/poppins_regular"
         android:text="Confirmar presença"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/ivBack"
-        app:layout_constraintStart_toEndOf="@id/ivBack"
-        app:layout_constraintTop_toTopOf="@id/ivBack" />
+        app:layout_constraintBottom_toBottomOf="@id/ivVoltar"
+        app:layout_constraintStart_toEndOf="@id/ivVoltar"
+        app:layout_constraintTop_toTopOf="@id/ivVoltar" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardBookmark"
+        android:id="@+id/cardSalvar"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_marginTop="42dp"
@@ -62,86 +73,233 @@
             app:tint="#FF7F87" />
     </com.google.android.material.card.MaterialCardView>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivHeaderImage"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="40dp"
-        android:contentDescription="Ícone evento"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        app:tint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivBack" />
-
-    <LinearLayout
-        android:id="@+id/contentContainer"
+    <ScrollView
+        android:id="@+id/scrollContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingStart="20dp"
-        android:paddingTop="14dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="14dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topSection">
+        app:layout_constraintTop_toBottomOf="@id/topImageContainer">
 
-        <TextView
-            android:id="@+id/tvTituloEvento"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="EVENTO"
-            android:fontFamily="@font/poppins_bold"
-            android:textColor="#1E1E2D"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivEventoConfirmado"
-            android:layout_width="220dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="34dp"
-            android:contentDescription="Evento confirmado"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/img_evento_confirmado"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tvMensagemConfirmacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="Evento confirmado!"
-            android:fontFamily="@font/poppins_bold"
-            android:textColor="#1E1E2D"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btnVoltar"
-            android:layout_width="115dp"
-            android:layout_height="38dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="42dp"
-            app:cardBackgroundColor="#3F7BFA"
-            app:cardCornerRadius="19dp"
-            app:cardElevation="0dp">
+            android:orientation="vertical"
+            android:paddingStart="22dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="24dp">
 
             <TextView
+                android:id="@+id/tvTituloEvento"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Voltar"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-        </com.google.android.material.card.MaterialCardView>
+                android:text="Inovação: futuro com IA"
+                android:textColor="#1F1F2E"
+                android:textSize="17sp" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:cardBackgroundColor="#E7EAFF"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="Data"
+                        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+                        app:tint="#5966FF" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDataEvento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="10 de Abril, 2026"
+                        android:textColor="#3D3D53"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvHorarioEvento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Sexta-feira, 16h - 17h"
+                        android:textColor="#8B8FA8"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:cardBackgroundColor="#E7EAFF"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="Local"
+                        app:srcCompat="@android:drawable/ic_menu_mylocation"
+                        app:tint="#5966FF" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvLocalEvento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Teatro Celina Queiroz"
+                        android:textColor="#2E2E40"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvEnderecoEvento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Av. Washington Soares, 1321"
+                        android:textColor="#8B8FA8"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivOrganizador"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:contentDescription="Organizador"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_avatar_1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNomeOrganizador"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Unifor"
+                        android:textColor="#2E2E40"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvCargoOrganizador"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Organizador"
+                        android:textColor="#8B8FA8"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPerguntaConfirmacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Deseja confirmar sua presença"
+                android:textColor="#2E2E40"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/layoutBotoesAcao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="118dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardBackgroundColor="#DCE6FF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="Cancelar"
+                        android:textColor="#356BDE"
+                        android:textSize="14sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnConfirmar"
+                    android:layout_width="118dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    app:cardBackgroundColor="#3F7BFA"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:text="Sim"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/bottomNav"
@@ -175,8 +333,7 @@
             android:layout_width="1dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF"
-            />
+            android:background="#80FFFFFF" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -196,8 +353,7 @@
             android:layout_width="1dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF"
-            />
+            android:background="#80FFFFFF" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -217,8 +373,7 @@
             android:layout_width="1dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF"
-            />
+            android:background="#80FFFFFF" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -235,6 +390,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

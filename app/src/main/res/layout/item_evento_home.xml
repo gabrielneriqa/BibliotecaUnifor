@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="168dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:background="@drawable/bg_calendar_card"
+        android:clipToOutline="true">
+
+        <ImageView
+            android:id="@+id/ivEventoHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_evento_placeholder" />
+
+        <!-- Badge de data (topo esquerdo) -->
+        <LinearLayout
+            android:layout_width="38dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_date_badge"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:id="@+id/tvDiaHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="10"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvMesHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="ABR"
+                android:textColor="#CCFFFFFF"
+                android:textSize="9sp" />
+
+        </LinearLayout>
+
+        <!-- Bookmark (topo direito) -->
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_bookmark_outline"
+            android:tint="#FFFFFF" />
+
+    </FrameLayout>
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTituloEventoHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_bold"
+        android:maxLines="2"
+        android:text="Inovação: futuro com IA"
+        android:textColor="#1A1A1A"
+        android:textSize="13sp" />
+
+    <!-- Avatares + confirmados -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivAvatar1Home"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_round_avatar"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_avatar_1" />
+
+        <ImageView
+            android:id="@+id/ivAvatar2Home"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="-5dp"
+            android:background="@drawable/bg_round_avatar"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_avatar_2" />
+
+        <ImageView
+            android:id="@+id/ivAvatar3Home"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="-5dp"
+            android:background="@drawable/bg_round_avatar"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_avatar_3" />
+
+        <TextView
+            android:id="@+id/tvConfirmadosHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_confirmados_badge"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="+30 confirmados"
+            android:textColor="#2E7D32"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <!-- Local -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_location" />
+
+        <TextView
+            android:id="@+id/tvLocalHome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_regular"
+            android:maxLines="1"
+            android:text="Teatro Celina Queiroz"
+            android:textColor="#888888"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

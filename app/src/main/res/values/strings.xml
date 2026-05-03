@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">UniforEventos</string>
+    <string name="back">Voltar</string>
+    <string name="filters">Filtro</string>
+    <string name="category">Categoria</string>
+    <string name="lectures">Palestras</string>
+    <string name="workshops">Oficinas</string>
+    <string name="exhibitions">Exposições</string>
+    <string name="courses">Cursos</string>
+    <string name="period">Período</string>
+    <string name="start_date">Data Inicial</string>
+    <string name="end_date">Data Final</string>
+    <string name="location">Localização</string>
+    <string name="clear">Limpar</string>
+    <string name="apply">Aplicar</string>
+    <string name="select_date">Selecionar Data</string>
+    <string name="time_label">Horário</string>
+    <string name="until">até</string>
+    <string name="default_start_time">08:00</string>
+    <string name="default_end_time">18:00</string>
+
+    <!-- Novos Filtros -->
+    <string name="category_design">Design</string>
+    <string name="category_ti">TI</string>
+    <string name="category_musica">Música</string>
+    <string name="category_negocios">Negócios</string>
+    <string name="category_arte">Arte</string>
+    <string name="date_time">Data e hora</string>
+    <string name="today">Hoje</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="next_week">Próxima semana</string>
+    <string name="view_calendars">Ver calendários</string>
+    <string name="library">Biblioteca</string>
+    <string name="clear_upper">LIMPAR</string>
+    <string name="apply_upper">APLICAR</string>
 </resources>

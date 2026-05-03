@@ -23,7 +23,6 @@
             android:paddingTop="16dp"
             android:paddingEnd="16dp">
 
-            <!-- TOPO DO HEADER -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -63,7 +62,9 @@
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
+
             </RelativeLayout>
 
             <!-- SEARCH + FILTRO -->
@@ -74,7 +75,6 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- SEARCH -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -109,9 +109,9 @@
                         android:textColor="#FFFFFF"
                         android:textColorHint="#CCFFFFFF"
                         android:textSize="16sp" />
+
                 </LinearLayout>
 
-                <!-- BOTÃO FILTRO -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
@@ -136,6 +136,7 @@
                         android:text="Filtros"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -151,7 +152,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- VOLTAR -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -172,6 +172,7 @@
                     android:text="Voltar"
                     android:textColor="#8C8C8C"
                     android:textSize="14sp" />
+
             </LinearLayout>
 
             <TextView
@@ -193,7 +194,6 @@
                 android:orientation="horizontal"
                 android:padding="12dp">
 
-                <!-- CAPA -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="72dp"
                     android:layout_height="100dp"
@@ -202,7 +202,6 @@
                     android:src="@drawable/livro_mock"
                     app:shapeAppearanceOverlay="@style/RoundedBookCover" />
 
-                <!-- TEXTO -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,12 +218,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Livro"
+                            android:text="Harry Potter"
                             android:textColor="#2B2B2B"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/btnEstenderEmprestimo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_extend_button"
@@ -236,6 +236,7 @@
                             android:text="Estender empréstimo"
                             android:textColor="#FF6B6B"
                             android:textSize="12sp" />
+
                     </LinearLayout>
 
                     <TextView
@@ -287,62 +288,11 @@
 
     </RelativeLayout>
 
-    <!-- SIDEBAR PRONTA (VISUAL) -->
-    <LinearLayout
-        android:id="@+id/sidebarMenu"
-        android:layout_width="280dp"
+    <!-- SIDEBAR -->
+    <include
+        layout="@layout/layout_sidebar"
+        android:layout_width="285dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#FFFFFF"
-        android:elevation="8dp"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Menu"
-            android:textColor="#2B2B2B"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="Início"
-            android:textColor="#4A4A4A"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="Meus livros"
-            android:textColor="#4A4A4A"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="Reservas"
-            android:textColor="#4A4A4A"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="Perfil"
-            android:textColor="#4A4A4A"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+        android:layout_gravity="start" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
