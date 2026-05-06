@@ -74,10 +74,11 @@
             app:tint="#FF7F87" />
     </com.google.android.material.card.MaterialCardView>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
@@ -391,52 +392,29 @@
                     tools:text="Prepare-se para uma experiência inspiradora sobre como a Inteligência Artificial está moldando o futuro." />
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSalvarAlteracoes"
                 android:layout_width="220dp"
                 android:layout_height="44dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="24dp"
-                app:cardBackgroundColor="#72D3A4"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:letterSpacing="0.08"
-                        android:text="SALVAR ALTERAÇÕES"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="8dp"
-                        app:cardBackgroundColor="#98E0BC"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="0dp">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="Salvar"
-                            app:srcCompat="@android:drawable/ic_media_next"
-                            app:tint="#FFFFFF" />
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:fontFamily="@font/poppins_bold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:letterSpacing="0.08"
+                android:text="SALVAR ALTERAÇÕES"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                app:backgroundTint="#72D3A4"
+                app:cornerRadius="14dp"
+                app:icon="@android:drawable/ic_media_next"
+                app:iconGravity="textEnd"
+                app:iconPadding="8dp"
+                app:iconTint="#FFFFFF"
+                app:rippleColor="#33FFFFFF" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/bottomNav"
@@ -461,7 +439,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:contentDescription="Home"
+                android:contentDescription="Notificações"
                 android:src="@android:drawable/ic_menu_view"
                 app:tint="#FFFFFF" />
         </LinearLayout>
