@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#5265FF">
 
-    <!-- PLACEHOLDER DO BOTÃO VOLTAR -->
     <View
         android:id="@+id/placeholderBack"
         android:layout_width="40dp"
@@ -17,7 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- TÍTULO -->
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="0dp"
@@ -32,7 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- IMAGEM -->
     <ImageView
         android:id="@+id/imgCenter"
         android:layout_width="0dp"
@@ -46,7 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- CARD -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardBottom"
         android:layout_width="0dp"
@@ -64,7 +60,6 @@
             android:layout_height="match_parent"
             android:padding="24dp">
 
-            <!-- INDICADOR -->
             <LinearLayout
                 android:id="@+id/indicator"
                 android:layout_width="wrap_content"
@@ -94,7 +89,6 @@
                     android:layout_margin="4dp"/>
             </LinearLayout>
 
-            <!-- TEXTO (CORRIGIDO) -->
             <TextView
                 android:id="@+id/txtDescription"
                 android:layout_width="0dp"
@@ -109,7 +103,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!-- BOTÃO PULAR -->
             <Button
                 android:id="@+id/btnSkip"
                 android:layout_width="0dp"
@@ -117,6 +110,8 @@
                 android:text="Pular"
                 android:textColor="#214798"
                 android:background="@drawable/bg_button_secondary"
+                android:backgroundTint="@null"
+                app:backgroundTint="@null"
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +119,6 @@
                 app:layout_constraintEnd_toStartOf="@id/btnNext"
                 app:layout_constraintHorizontal_weight="1"/>
 
-            <!-- BOTÃO PRÓXIMO -->
             <Button
                 android:id="@+id/btnNext"
                 android:layout_width="0dp"
@@ -132,6 +126,8 @@
                 android:text="Próximo"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/bg_button_primary"
+                android:backgroundTint="@null"
+                app:backgroundTint="@null"
                 android:fontFamily="@font/poppins_medium"
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
