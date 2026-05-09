@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniforEventos">
         <activity
+            android:name=".ResultadosBuscaActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetalhesEventoConfirmado"
             android:exported="false" />
         <activity
@@ -63,7 +66,6 @@
         <activity android:name=".EventoCanceladoActivity" />
         <activity android:name=".CancelarPresencaActivity" />
         <activity android:name=".PresencaCanceladaActivity" />
-
     </application>
 
 </manifest>
