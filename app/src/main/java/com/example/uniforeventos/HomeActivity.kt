@@ -3,6 +3,7 @@ package com.example.uniforeventos
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
         configurarFiltros()
         carregarListaEventos()
         configurarVerBilioteca()
+        buscarLivro()
     }
 
     private fun configurarHamburger() {
@@ -136,6 +138,12 @@ class HomeActivity : AppCompatActivity() {
         val filter = findViewById<View>(R.id.btnFiltros)
         filter.setOnClickListener {
             startActivity(Intent(this, FilterActivity::class.java))
+        }
+    }
+
+    private fun buscarLivro(){
+        findViewById<ImageView>(R.id.ivBuscarLivro).setOnClickListener {
+            startActivity(Intent(this, BibliotecaActivity::class.java))
         }
     }
 
