@@ -49,6 +49,7 @@ class CreateEventActivity : AppCompatActivity() {
     private fun criarEvento(){
         findViewById<MaterialButton>(R.id.btnAgendarEvento).setOnClickListener {
             startActivity(Intent(this, EventoCriadoActivity::class.java))
+            finish()
         }
     }
 

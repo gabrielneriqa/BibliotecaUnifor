@@ -1,5 +1,6 @@
 package com.example.uniforeventos
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -9,16 +10,18 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.card.MaterialCardView
 
-
-class DetalhesEventoActivity : AppCompatActivity() {
+class DetalhesEventoConfirmado : AppCompatActivity() {
 
     private lateinit var imagemEvento: ImageView
     private lateinit var botaoVoltar: AppCompatImageView
@@ -36,12 +39,12 @@ class DetalhesEventoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detalhes_evento)
+        setContentView(R.layout.activity_detalhes_evento_confirmado)
 
         inicializarViews()
         configurarCliqueDoBotaoVoltar()
         preencherDadosDoEvento()
-        confirmarPresenca()
+        configurarBotaoCancelarPresenca()
     }
 
     private fun inicializarViews() {
@@ -140,9 +143,10 @@ class DetalhesEventoActivity : AppCompatActivity() {
         textoDescricaoEvento.text = spannableString
     }
 
-    private fun confirmarPresenca() {
-        findViewById<MaterialCardView>(R.id.btnConfirmarPresencaDetalhes).setOnClickListener {
-            startActivity(Intent(this, ConfirmarPresencaActivity::class.java))
+    private fun configurarBotaoCancelarPresenca() {
+        findViewById<MaterialCardView>(R.id.btnCancelarPresenca).setOnClickListener {
+            startActivity(Intent(this, CancelarPresencaActivity::class.java))
+            finish()
         }
     }
 
@@ -189,7 +193,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
         private const val LIMITE_DESCRICAO_COLAPSADA = 140
 
         fun abrir(contexto: Context, evento: Evento) {
-            val intent = Intent(contexto, DetalhesEventoActivity::class.java).apply {
+            val intent = Intent(contexto, DetalhesEventoConfirmado::class.java).apply {
                 putExtra(EXTRA_TITULO, evento.titulo)
                 putExtra(EXTRA_DATA_COMPLETA, evento.dataCompleta)
                 putExtra(EXTRA_HORARIO, evento.horario)

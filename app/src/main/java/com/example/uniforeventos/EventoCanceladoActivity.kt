@@ -5,15 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
-class EventoCriadoActivity: AppCompatActivity() {
+class EventoCanceladoActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_evento_confirmado)
-
-        voltar()
+        setContentView(R.layout.activity_evento_cancelado)
+        sair()
     }
 
-    private fun voltar(){
+    private fun sair(){
         findViewById<MaterialButton>(R.id.btnVoltar).setOnClickListener {
             finish()
         }
