@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UniforEventos">
-
+        <activity
+            android:name=".MeusEventosConfirmados"
+            android:exported="false" />
         <activity
             android:name=".DateTimeFilterActivity"
             android:exported="false" />
@@ -25,10 +27,10 @@
             android:theme="@style/Theme.UniforEventos">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".LoginActivity" />
         <activity android:name=".RedefinirSenhaActivity" />
         <activity android:name=".EmailEnviadoActivity" />
@@ -43,6 +45,17 @@
         <activity android:name=".ListaEventosActivity" />
         <activity android:name=".EstenderEmprestimoActivity" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".DetalhesLivroActivity" />
+        <activity android:name=".BibliotecaActivity" />
+        <activity android:name=".ConfirmarReservaActivity" />
+        <activity android:name=".ContaUsuarioActivity" />
+        <activity android:name=".LogoutActivity" />
+        <activity android:name=".SuporteActivity" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".ReservaConfirmada" />
+        <activity android:name=".EventoCriadoActivity"/>
+        <activity android:name=".ConfirmarPresencaActivity"/>
+
     </application>
 
 </manifest>

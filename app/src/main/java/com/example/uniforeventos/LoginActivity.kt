@@ -50,8 +50,13 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        val acaoLoginRapido = {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
+
         btnEntrar.setOnClickListener { acaoLogin() }
-        btnLoginFake.setOnClickListener { acaoLogin() }
+        btnLoginFake.setOnClickListener { acaoLoginRapido() }
 
         tvEsqueceuSenha.setOnClickListener {
             startActivity(Intent(this, RedefinirSenhaActivity::class.java))

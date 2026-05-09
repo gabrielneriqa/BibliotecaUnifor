@@ -11,9 +11,11 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import com.google.android.material.card.MaterialCardView
 
 
 class DetalhesEventoActivity : AppCompatActivity() {
@@ -39,6 +41,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
         inicializarViews()
         configurarCliqueDoBotaoVoltar()
         preencherDadosDoEvento()
+        confirmarPresenca()
     }
 
     private fun inicializarViews() {
@@ -135,6 +138,12 @@ class DetalhesEventoActivity : AppCompatActivity() {
         )
 
         textoDescricaoEvento.text = spannableString
+    }
+
+    private fun confirmarPresenca() {
+        findViewById<MaterialCardView>(R.id.btnConfirmarPresencaDetalahes).setOnClickListener {
+            startActivity(Intent(this, ConfirmarPresencaActivity::class.java))
+        }
     }
 
     private fun aplicarDescricaoExpandida() {

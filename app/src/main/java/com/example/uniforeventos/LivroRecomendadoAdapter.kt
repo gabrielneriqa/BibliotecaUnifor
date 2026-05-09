@@ -1,5 +1,6 @@
 package com.example.uniforeventos
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class LivroRecomendadoAdapter(
-    private val livros: List<LivroRecomendado>
+    private val livros: List<LivroRecomendado>,
+    private val verDetlahes: () -> Unit
 ) : RecyclerView.Adapter<LivroRecomendadoAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,7 +35,7 @@ class LivroRecomendadoAdapter(
         holder.tvAutor.text = "Autor: ${livro.autor}"
         holder.tvAno.text = "Ano: ${livro.ano}"
         holder.tvCodigo.text = "Código: ${livro.codigo}"
-        holder.tvVerDetalhes.setOnClickListener { /* TODO: abrir detalhes do livro */ }
+        holder.tvVerDetalhes.setOnClickListener { verDetlahes() }
     }
 
     override fun getItemCount(): Int = livros.size
