@@ -57,10 +57,10 @@ class MeusEventosConfirmados : AppCompatActivity() {
     private fun configurarRecyclerView() {
         eventosConfirmadosAdapter = EventoHomeAdapter(
             aoClicarNoEvento = { eventoSelecionado ->
-                DetalhesEventoActivity.abrir(this, eventoSelecionado)
+                DetalhesEventoConfirmado.abrir(this, eventoSelecionado)
             },
             aoClicarEmVerDetalhes = { eventoSelecionado ->
-                DetalhesEventoActivity.abrir(this, eventoSelecionado)
+                DetalhesEventoConfirmado.abrir(this, eventoSelecionado)
             }
         )
 
@@ -72,11 +72,11 @@ class MeusEventosConfirmados : AppCompatActivity() {
 
 
         meusEventosAdapter = MeusEventosAdapter(
-            aoClicarNoEvento = { eventoSelecionado ->
-                DetalhesEventoActivity.abrir(this, eventoSelecionado)
+            aoClicarNoEvento = {
+                startActivity(Intent(this, EditarEventoActivity::class.java))
             },
-            aoClicarEmVerDetalhes = { eventoSelecionado ->
-                DetalhesEventoActivity.abrir(this, eventoSelecionado)
+            aoClicarEmVerDetalhes = {
+                startActivity(Intent(this, EditarEventoActivity::class.java))
             }
         )
 

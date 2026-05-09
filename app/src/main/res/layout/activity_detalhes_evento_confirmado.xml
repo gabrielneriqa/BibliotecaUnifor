@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F4F6">
+    android:background="#F4F4F6"
+    tools:context=".DetalhesEventoConfirmado">
 
     <FrameLayout
         android:id="@+id/topImageContainer"
@@ -261,7 +264,7 @@
                 android:textSize="14sp" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/btnConfirmarPresencaDetalhes"
+                android:id="@+id/btnCancelarPresenca"
                 android:layout_width="240dp"
                 android:layout_height="44dp"
                 android:layout_gravity="center_horizontal"
@@ -281,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
                         android:letterSpacing="0.08"
-                        android:text="CONFIRMAR PRESENÇA"
+                        android:text="CANCELAR PRESENÇA"
                         android:textColor="#FFFFFF"
                         android:textSize="13sp" />
 

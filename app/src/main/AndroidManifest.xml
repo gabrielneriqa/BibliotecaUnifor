@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniforEventos">
         <activity
+            android:name=".DetalhesEventoConfirmado"
+            android:exported="false" />
+        <activity
             android:name=".MeusEventosConfirmados"
             android:exported="false" />
         <activity
@@ -53,8 +56,13 @@
         <activity android:name=".SuporteActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".ReservaConfirmada" />
-        <activity android:name=".EventoCriadoActivity"/>
-        <activity android:name=".ConfirmarPresencaActivity"/>
+        <activity android:name=".EventoCriadoActivity" />
+        <activity android:name=".ConfirmarPresencaActivity" />
+        <activity android:name=".EditarEventoActivity" />
+        <activity android:name=".EdicaoEventoActivity" />
+        <activity android:name=".EventoCanceladoActivity" />
+        <activity android:name=".CancelarPresencaActivity" />
+        <activity android:name=".PresencaCanceladaActivity" />
 
     </application>
 

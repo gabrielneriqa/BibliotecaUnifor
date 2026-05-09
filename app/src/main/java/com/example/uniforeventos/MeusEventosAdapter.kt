@@ -11,21 +11,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 
 class MeusEventosAdapter (
-    private val aoClicarNoEvento: (Evento) -> Unit,
-    private val aoClicarEmVerDetalhes: (Evento) -> Unit
-) : ListAdapter<Evento, MeusEventosAdapter.EventoViewHolder>(MeusEventosDiffCallback()) {
+    private val aoClicarNoEvento: () -> Unit,
+    private val aoClicarEmVerDetalhes: () -> Unit
+) : ListAdapter<Evento, MeusEventosAdapter.MeusEventosViewHolder>(MeusEventosDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeusEventosViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_evento, parent, false)
-        return EventoViewHolder(view)
+            .inflate(R.layout.item_meu_evento, parent, false)
+        return MeusEventosViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: EventoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MeusEventosViewHolder, position: Int) {
         holder.vincular(getItem(position))
     }
 
-    inner class EventoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MeusEventosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val imagemEvento: ImageView           = itemView.findViewById(R.id.ivEvento)
         private val textoDia: TextView                = itemView.findViewById(R.id.tvDia)
@@ -50,8 +50,8 @@ class MeusEventosAdapter (
             textoConfirmados.text = evento.confirmadosTexto
             textoLocal.text = evento.local
             cardFavorito.visibility = if (evento.favorito) View.VISIBLE else View.GONE
-            itemView.setOnClickListener { aoClicarNoEvento(evento) }
-            botaoVerDetalhes.setOnClickListener { aoClicarEmVerDetalhes(evento) }
+            itemView.setOnClickListener { aoClicarNoEvento() }
+            botaoVerDetalhes.setOnClickListener { aoClicarEmVerDetalhes() }
         }
     }
 }
