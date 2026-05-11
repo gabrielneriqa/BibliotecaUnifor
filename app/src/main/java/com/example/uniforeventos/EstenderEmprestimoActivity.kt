@@ -77,7 +77,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_notifications -> {
-                    Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, NotificationActivity::class.java))
                     true
                 }
                 R.id.nav_books -> {
@@ -85,7 +85,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
                     true
                 }
                 else -> false

@@ -66,7 +66,7 @@
 
         </RelativeLayout>
 
-        <!-- CONTEÚDO DA TELA -->
+        <!-- CONTEÚDO DA NOTIFICAÇÃO -->
         <RelativeLayout
             android:id="@+id/contentNotificacao"
             android:layout_width="match_parent"
@@ -118,67 +118,118 @@
 
             </FrameLayout>
 
-            <!-- ESTADO VAZIO -->
-            <LinearLayout
-                android:id="@+id/emptyStateContainer"
+            <!-- LINHA DA NOTIFICAÇÃO -->
+            <RelativeLayout
+                android:id="@+id/notificationRow"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="70dp"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="72dp"
+                android:layout_below="@id/tvTituloNotificacao"
+                android:layout_marginTop="45dp">
 
-                <!-- ILUSTRAÇÃO -->
-                <FrameLayout
-                    android:layout_width="180dp"
-                    android:layout_height="180dp">
+                <!-- IMAGEM REDONDA -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardAvatar"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    app:cardBackgroundColor="#FFD43B"
+                    app:cardCornerRadius="23dp"
+                    app:cardElevation="0dp">
 
                     <ImageView
-                        android:id="@+id/imgEmptyNotification"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_gravity="center"
-                        android:contentDescription="Sem notificações"
-                        android:src="@drawable/ic_empty_notifications" />
+                        android:id="@+id/imgAvatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Imagem do usuário"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/foto_notificacao" />
 
-                    <TextView
-                        android:id="@+id/tvBadgeZero"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginTop="35dp"
-                        android:background="@drawable/bg_badge_zero"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
 
-                </FrameLayout>
+                <!-- CHECK VERDE -->
+                <ImageView
+                    android:id="@+id/checkStatus"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/cardAvatar"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="Check verde"
+                    android:src="@drawable/ic_check_green" />
 
-                <TextView
-                    android:id="@+id/tvSemNotificacoes"
-                    android:layout_width="wrap_content"
+                <!-- TEXTO DA NOTIFICAÇÃO -->
+                <LinearLayout
+                    android:id="@+id/textNotificationContainer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Sem notificações!"
-                    android:textColor="#2E4568"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_alignTop="@id/cardAvatar"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_toEndOf="@id/cardAvatar"
+                    android:layout_toStartOf="@id/checkStatus"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvDescricaoSemNotificacoes"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center"
-                    android:lineSpacingExtra="6dp"
-                    android:text="Você ainda não tem notificações.&#10;Quando houver novidades, avisaremos&#10;você por aqui."
-                    android:textColor="#7A8CA8"
-                    android:textSize="16sp" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="O evento "
+                            android:textColor="#3C3C5A"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cidades"
+                            android:textColor="#111827"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Inteligentes"
+                            android:textColor="#111827"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" foi cancelado"
+                            android:textColor="#3C3C5A"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!-- LINHA ABAIXO DA NOTIFICAÇÃO -->
+            <View
+                android:id="@+id/dividerNotification"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/notificationRow"
+                android:layout_marginStart="-24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="-24dp"
+                android:background="#EEEEEE" />
 
         </RelativeLayout>
 
@@ -186,9 +237,9 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
             android:layout_width="match_parent"
-            android:layout_height="76dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_gradient"
+            android:background="#FFFFFF"
             app:itemIconTint="@color/nav_item_color"
             app:itemTextColor="@color/nav_item_color"
             app:labelVisibilityMode="unlabeled"

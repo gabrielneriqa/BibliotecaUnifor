@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class DetalhesEventoActivity : AppCompatActivity() {
@@ -42,6 +43,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
         configurarCliqueDoBotaoVoltar()
         preencherDadosDoEvento()
         confirmarPresenca()
+        configurarBottomNav()
     }
 
     private fun inicializarViews() {
@@ -205,4 +207,32 @@ class DetalhesEventoActivity : AppCompatActivity() {
             contexto.startActivity(intent)
         }
     }
+
+    private fun configurarBottomNav() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_home
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, NotificationActivity::class.java))
+                    true
+                }
+                R.id.nav_books -> {
+                    startActivity(Intent(this, LivrosReservadosActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
 }
