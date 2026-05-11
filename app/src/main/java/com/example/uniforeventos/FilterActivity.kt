@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -28,5 +29,7 @@ class FilterActivity : AppCompatActivity() {
             val intent = Intent(this, DateTimeFilterActivity::class.java)
             startActivity(intent)
         }
+
+        findViewById<AppCompatButton>(R.id.btnApply).setOnClickListener { finish() }
     }
 }

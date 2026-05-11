@@ -3,6 +3,7 @@ package com.example.uniforeventos
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
+import android.widget.LinearLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SuporteActivity: AppCompatActivity() {
@@ -10,8 +11,12 @@ class SuporteActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_suporte)
         configurarBottomNav()
+        enviar()
     }
 
+    private fun enviar(){
+        findViewById<LinearLayout>(R.id.btnEnviar).setOnClickListener{ finish() }
+    }
     private fun configurarBottomNav() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_profile
