@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CreateEventActivity : AppCompatActivity() {
 
@@ -29,6 +30,7 @@ class CreateEventActivity : AppCompatActivity() {
         }
 
         criarEvento()
+        configurarBottomNav()
     }
 
     private fun abrirCalendario() {
@@ -50,6 +52,34 @@ class CreateEventActivity : AppCompatActivity() {
         findViewById<MaterialButton>(R.id.btnAgendarEvento).setOnClickListener {
             startActivity(Intent(this, EventoCriadoActivity::class.java))
             finish()
+        }
+    }
+
+
+    private fun configurarBottomNav() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_home
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, NotificationActivity::class.java))
+                    true
+                }
+                R.id.nav_books -> {
+                    startActivity(Intent(this, LivrosReservadosActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
+                    true
+                }
+                else -> false
+            }
         }
     }
 

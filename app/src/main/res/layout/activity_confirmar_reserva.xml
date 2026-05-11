@@ -285,9 +285,9 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
             android:layout_width="match_parent"
-            android:layout_height="76dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_gradient"
+            android:background="#FFFFFF"
             app:itemIconTint="@color/nav_item_color"
             app:itemTextColor="@color/nav_item_color"
             app:labelVisibilityMode="unlabeled"

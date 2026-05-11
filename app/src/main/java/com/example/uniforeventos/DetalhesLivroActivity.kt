@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DetalhesLivroActivity: AppCompatActivity() {
 
@@ -14,10 +15,11 @@ class DetalhesLivroActivity: AppCompatActivity() {
         setContentView(R.layout.activity_detalhes_livro)
         reservarLivro()
         voltar()
+        configurarBottomNav()
     }
 
     private fun reservarLivro(){
-        var botaoReservar = findViewById<LinearLayout>(R.id.btnReservar)
+        val botaoReservar = findViewById<LinearLayout>(R.id.btnReservar)
         botaoReservar.setOnClickListener {
             startActivity(Intent(this, ConfirmarReservaActivity::class.java))
         }
@@ -32,4 +34,30 @@ class DetalhesLivroActivity: AppCompatActivity() {
         contexto.startActivity(intent)
     }
 
+    private fun configurarBottomNav() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_books
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, NotificationActivity::class.java))
+                    true
+                }
+                R.id.nav_books -> {
+                    startActivity(Intent(this, LivrosReservadosActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 }

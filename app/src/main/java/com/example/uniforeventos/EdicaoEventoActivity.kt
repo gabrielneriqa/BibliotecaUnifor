@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class EdicaoEventoActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_evento)
         botaoConfirmar()
+        configurarBottomNav()
     }
     private fun botaoConfirmar(){
         findViewById<MaterialButton>(R.id.btnSalvarAlteracoes).setOnClickListener { salvar() }
@@ -39,4 +41,32 @@ class EdicaoEventoActivity: AppCompatActivity() {
 
         alertDialog.show()
     }
+
+    private fun configurarBottomNav() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_home
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, NotificationActivity::class.java))
+                    true
+                }
+                R.id.nav_books -> {
+                    startActivity(Intent(this, LivrosReservadosActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
 }
