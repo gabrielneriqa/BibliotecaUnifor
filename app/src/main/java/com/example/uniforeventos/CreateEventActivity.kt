@@ -1,9 +1,11 @@
 package com.example.uniforeventos
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -25,6 +27,8 @@ class CreateEventActivity : AppCompatActivity() {
         dateRow.setOnClickListener {
             abrirCalendario()
         }
+
+        criarEvento()
     }
 
     private fun abrirCalendario() {
@@ -40,6 +44,13 @@ class CreateEventActivity : AppCompatActivity() {
         }
 
         datePicker.show(supportFragmentManager, "DATE_PICKER")
+    }
+
+    private fun criarEvento(){
+        findViewById<MaterialButton>(R.id.btnAgendarEvento).setOnClickListener {
+            startActivity(Intent(this, EventoCriadoActivity::class.java))
+            finish()
+        }
     }
 
 }

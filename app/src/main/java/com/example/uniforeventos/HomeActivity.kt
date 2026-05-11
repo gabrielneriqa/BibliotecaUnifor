@@ -3,6 +3,8 @@ package com.example.uniforeventos
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -14,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var eventos: List<Evento>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,9 @@ class HomeActivity : AppCompatActivity() {
         configurarLivros()
         configurarBottomNav()
         configurarFiltros()
+        carregarListaEventos()
+        configurarVerBilioteca()
+        buscarLivro()
     }
 
     private fun configurarHamburger() {
@@ -48,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
         }
         findViewById<View>(R.id.menuNotificacoes).setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
-            Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, NotificationActivity::class.java))
         }
         findViewById<View>(R.id.menuLivrosReservados).setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -56,11 +62,14 @@ class HomeActivity : AppCompatActivity() {
         }
         findViewById<View>(R.id.menuEventosReservados).setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
-            Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MeusEventosConfirmados::class.java)
+            // Garantimos que a lista seja enviada como um ArrayList serializável
+            intent.putExtra("LISTA_EVENTOS", ArrayList(this.eventos))
+            startActivity(intent)
         }
         findViewById<View>(R.id.menuPerfil).setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
-            Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ContaUsuarioActivity::class.java))
         }
     }
 
@@ -122,12 +131,36 @@ class HomeActivity : AppCompatActivity() {
         )
         rv.adapter = adapter
         adapter.submitList(eventos)
+        this.eventos = eventos
     }
 
     private fun configurarFiltros(){
-        var filter = findViewById<View>(R.id.btnFiltros)
+        val filter = findViewById<View>(R.id.btnFiltros)
         filter.setOnClickListener {
             startActivity(Intent(this, FilterActivity::class.java))
+        }
+    }
+
+    private fun buscarLivro(){
+        findViewById<ImageView>(R.id.ivBuscarLivro).setOnClickListener {
+            startActivity(Intent(this, BibliotecaActivity::class.java))
+        }
+    }
+
+    private fun carregarListaEventos(){
+        val botaoListarEventos = findViewById<View>(R.id.tvVerEventos)
+        botaoListarEventos?.setOnClickListener {
+            val intent = Intent(this, ListaEventosActivity::class.java)
+            // Garantimos que a lista seja enviada como um ArrayList serializável
+            intent.putExtra("LISTA_EVENTOS", ArrayList(this.eventos))
+            startActivity(intent)
+        }
+    }
+
+    private fun configurarVerBilioteca(){
+        val btnBiblioteca = findViewById<TextView>(R.id.tvVerBiblioteca)
+        btnBiblioteca.setOnClickListener {
+            startActivity(Intent(this, BibliotecaActivity::class.java))
         }
     }
 
@@ -141,7 +174,7 @@ class HomeActivity : AppCompatActivity() {
 
         val rv = findViewById<RecyclerView>(R.id.rvLivros)
         rv.layoutManager = LinearLayoutManager(this)
-        rv.adapter = LivroRecomendadoAdapter(livros)
+        rv.adapter = LivroRecomendadoAdapter(livros, verDetlahes = { DetalhesLivroActivity().abrir(this) })
     }
 
     private fun configurarBottomNav() {
@@ -152,7 +185,7 @@ class HomeActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_home -> true
                 R.id.nav_notifications -> {
-                    Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, NotificationActivity::class.java))
                     true
                 }
                 R.id.nav_books -> {
@@ -160,7 +193,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
                     true
                 }
                 else -> false

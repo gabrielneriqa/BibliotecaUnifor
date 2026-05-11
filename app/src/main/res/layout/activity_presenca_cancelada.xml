@@ -163,7 +163,7 @@
                 android:layout_height="160dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="42dp"
-                android:contentDescription="Evento cancelado"
+                android:contentDescription="Presença cancelada"
                 android:scaleType="fitCenter"
                 android:src="@drawable/img_evento_cancelado" />
 
@@ -174,7 +174,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Evento cancelado!"
+                android:text="Presença cancelada!"
                 android:textColor="#1F1F2E"
                 android:textSize="16sp" />
 

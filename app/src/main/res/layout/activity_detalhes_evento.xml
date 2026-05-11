@@ -261,7 +261,7 @@
                 android:textSize="14sp" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/btnConfirmarPresenca"
+                android:id="@+id/btnConfirmarPresencaDetalhes"
                 android:layout_width="240dp"
                 android:layout_height="44dp"
                 android:layout_gravity="center_horizontal"

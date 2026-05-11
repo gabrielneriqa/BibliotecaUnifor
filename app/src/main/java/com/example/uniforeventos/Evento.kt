@@ -1,5 +1,7 @@
 package com.example.uniforeventos
 
+import java.io.Serializable
+
 data class Evento(
     val id: Long,
     val titulo: String,
@@ -19,4 +21,4 @@ data class Evento(
     val organizadorCargo: String,
     val organizadorImagemResId: Int,
     val descricao: String
-)
+) : Serializable
