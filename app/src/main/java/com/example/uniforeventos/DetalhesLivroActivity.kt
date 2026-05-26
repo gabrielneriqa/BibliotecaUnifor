@@ -8,30 +8,40 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class DetalhesLivroActivity: AppCompatActivity() {
+class DetalhesLivroActivity : AppCompatActivity() {
+
+    companion object {
+        const val EXTRA_LIVRO_ID = "livro_id"
+
+        fun abrir(context: Context, livroId: Long) {
+            val intent = Intent(context, DetalhesLivroActivity::class.java)
+            intent.putExtra(EXTRA_LIVRO_ID, livroId)
+            context.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhes_livro)
-        reservarLivro()
+
+        val livroId = intent.getLongExtra(EXTRA_LIVRO_ID, -1L)
+
+        reservarLivro(livroId)
         voltar()
         configurarBottomNav()
     }
 
-    private fun reservarLivro(){
+    private fun reservarLivro(livroId: Long) {
         val botaoReservar = findViewById<LinearLayout>(R.id.btnReservar)
         botaoReservar.setOnClickListener {
-            startActivity(Intent(this, ConfirmarReservaActivity::class.java))
+            val intent = Intent(this, ConfirmarReservaActivity::class.java)
+            intent.putExtra(ConfirmarReservaActivity.EXTRA_LIVRO_ID, livroId)
+            startActivity(intent)
         }
     }
 
-    private fun voltar(){
+    private fun voltar() {
         findViewById<ImageView>(R.id.btnVoltar).setOnClickListener { finish() }
-    }
-
-    fun abrir(contexto: Context){
-        val intent = Intent(contexto, DetalhesLivroActivity::class.java)
-        contexto.startActivity(intent)
     }
 
     private fun configurarBottomNav() {

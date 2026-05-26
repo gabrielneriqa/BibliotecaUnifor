@@ -39,21 +39,20 @@ class LoginActivity : AppCompatActivity() {
             val senha = etSenha.text.toString().trim()
 
             if (matricula == "1" && senha == "123") {
+                // 🔧 Substituir pelo id real retornado pelo endpoint de login quando implementado
+                SessionManager.salvarSessao(this, usuarioId = 1L, nome = "Usuário")
                 startActivity(Intent(this, OnboardingOneActivity::class.java))
                 finish()
             } else {
-                Toast.makeText(
-                    this,
-                    "Matrícula ou senha inválidas.", // Use 20240001 / 123456
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "Matrícula ou senha inválidas.", Toast.LENGTH_SHORT).show()
             }
         }
 
         val acaoLoginRapido = {
+            // 🔧 Login rápido também salva sessão com id provisório
+            SessionManager.salvarSessao(this, usuarioId = 1L, nome = "Usuário")
             startActivity(Intent(this, HomeActivity::class.java))
         }
-
 
         btnEntrar.setOnClickListener { acaoLogin() }
         btnLoginFake.setOnClickListener { acaoLoginRapido() }
