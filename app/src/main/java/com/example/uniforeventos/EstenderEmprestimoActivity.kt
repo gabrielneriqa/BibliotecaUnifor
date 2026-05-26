@@ -2,8 +2,6 @@ package com.example.uniforeventos
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
@@ -12,13 +10,24 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uniforeventos.network.RetrofitClient
+import com.example.uniforeventos.network.dto.EmprestimoResponseDTO
+import com.example.uniforeventos.network.dto.EstenderEmprestimoDTO
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
 
 class EstenderEmprestimoActivity : AppCompatActivity() {
+
+    companion object {
+        const val EXTRA_EMPRESTIMO_ID = "emprestimo_id"
+        const val EXTRA_LIVRO_TITULO = "livro_titulo"
+    }
 
     private var startDate: LocalDate? = null
     private var endDate: LocalDate? = null
@@ -27,15 +36,20 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
     private var currentDays: List<CalendarDay> = emptyList()
     private var currentYearMonth: YearMonth = YearMonth.now()
 
-    // 🔧 Substituir por datas reais vindas da API
+    // 🔧 Substituir por datas reais vindas da API (datas já reservadas por outros)
     private val reservedDates: Set<LocalDate> = setOf(
         LocalDate.of(2026, 4, 28),
         LocalDate.of(2026, 4, 29)
     )
 
+    private var emprestimoId: Long = -1L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_estender_emprestimo)
+
+        emprestimoId = intent.getLongExtra(EXTRA_EMPRESTIMO_ID, -1L)
+        val livroTitulo = intent.getStringExtra(EXTRA_LIVRO_TITULO) ?: ""
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerCalendar)
         val btnConfirmar = findViewById<View>(R.id.btnConfirmar)
@@ -61,7 +75,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
             carregarMes(currentYearMonth)
         }
 
-        btnConfirmar.setOnClickListener { confirmarExtensao() }
+        btnConfirmar.setOnClickListener { confirmarExtensao(btnConfirmar) }
 
         configurarBottomNav()
     }
@@ -157,7 +171,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
             val date = yearMonth.atDay(num)
 
             val isStart = date == startDate
-            val isEnd   = date == endDate
+            val isEnd = date == endDate
             val inRange = startDate != null && endDate != null
                     && date.isAfter(startDate) && date.isBefore(endDate)
 
@@ -178,33 +192,64 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         return days
     }
 
-    // ─── Confirmação ────────────────────────────────────────────────────────
+    // ─── Confirmação com API ─────────────────────────────────────────────────
 
-    private fun confirmarExtensao() {
-        if (startDate == null || endDate == null) {
-            Toast.makeText(this, "Selecione o período de extensão", Toast.LENGTH_SHORT).show()
+    private fun confirmarExtensao(btnConfirmar: View) {
+        val dataFim = endDate ?: startDate
+
+        if (dataFim == null) {
+            Toast.makeText(this, "Selecione a nova data de devolução", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // 🔧 Substituir pelo payload real da API:
-        // val body = ExtensaoRequest(livroId, startDate.toString(), endDate.toString())
-        // viewModel.estenderEmprestimo(body)
+        if (emprestimoId == -1L) {
+            Toast.makeText(this, "Empréstimo inválido.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            showSuccessOverlay()
-        }, 800)
+        btnConfirmar.isEnabled = false
+
+        val dto = EstenderEmprestimoDTO(fimEmprestimo = dataFim.toString())
+
+        RetrofitClient.instance.estender(emprestimoId, dto)
+            .enqueue(object : Callback<EmprestimoResponseDTO> {
+                override fun onResponse(
+                    call: Call<EmprestimoResponseDTO>,
+                    response: Response<EmprestimoResponseDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        showSuccessOverlay()
+                    } else {
+                        Toast.makeText(
+                            this@EstenderEmprestimoActivity,
+                            "Erro ao estender (${response.code()}).",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        btnConfirmar.isEnabled = true
+                    }
+                }
+
+                override fun onFailure(call: Call<EmprestimoResponseDTO>, t: Throwable) {
+                    Toast.makeText(
+                        this@EstenderEmprestimoActivity,
+                        "Falha de conexão.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    btnConfirmar.isEnabled = true
+                }
+            })
     }
 
     private fun showSuccessOverlay() {
         val overlay = findViewById<View>(R.id.successOverlay)
-        val imagem  = findViewById<ImageView>(R.id.imgSuccess)
-        val texto   = findViewById<TextView>(R.id.tvSuccessLabel)
+        val imagem = findViewById<ImageView>(R.id.imgSuccess)
+        val texto = findViewById<TextView>(R.id.tvSuccessLabel)
 
         overlay.alpha = 0f
         imagem.scaleX = 0f
         imagem.scaleY = 0f
-        imagem.alpha  = 0f
-        texto.alpha   = 0f
+        imagem.alpha = 0f
+        texto.alpha = 0f
 
         overlay.visibility = View.VISIBLE
 
@@ -223,6 +268,6 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
             .setDuration(300)
             .start()
 
-        Handler(Looper.getMainLooper()).postDelayed({ finish() }, 2000)
+        overlay.postDelayed({ finish() }, 2000)
     }
 }
