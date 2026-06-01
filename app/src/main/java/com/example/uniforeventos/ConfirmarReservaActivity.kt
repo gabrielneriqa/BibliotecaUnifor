@@ -27,6 +27,71 @@ class ConfirmarReservaActivity: AppCompatActivity() {
         findViewById<TextView>(R.id.btnCancelar).setOnClickListener {
             finish()
         }
+        val livroId = intent.getLongExtra(EXTRA_LIVRO_ID, -1L)
+
+        configurarBotaoConfirmar(livroId)
+        configurarBotaoCancelar()
+        configurarBottomNav()
+    }
+
+    private fun configurarBotaoConfirmar(livroId: Long) {
+        val btnSim = findViewById<TextView>(R.id.btnSim)
+
+        btnSim.setOnClickListener {
+            if (livroId == -1L) {
+                Toast.makeText(this, "Livro inválido.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val usuarioId = SessionManager.getUsuarioId(this)
+            if (usuarioId == -1L) {
+                Toast.makeText(this, "Sessão expirada. Faça login novamente.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            btnSim.isEnabled = false
+            btnSim.text = "Reservando..."
+
+            val request = EmprestimoRequestDTO(
+                usuarioId = usuarioId,
+                livroId = livroId
+            )
+
+            RetrofitClient.instance.criar(request).enqueue(object : Callback<EmprestimoResponseDTO> {
+                override fun onResponse(
+                    call: Call<EmprestimoResponseDTO>,
+                    response: Response<EmprestimoResponseDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        startActivity(Intent(this@ConfirmarReservaActivity, ReservaConfirmada::class.java))
+                        finish()
+                    } else {
+                        val erro = when (response.code()) {
+                            400 -> "Livro sem exemplares disponíveis."
+                            404 -> "Livro ou usuário não encontrado."
+                            else -> "Erro ao reservar (${response.code()})."
+                        }
+                        Toast.makeText(this@ConfirmarReservaActivity, erro, Toast.LENGTH_LONG).show()
+                        btnSim.isEnabled = true
+                        btnSim.text = "Sim"
+                    }
+                }
+
+                override fun onFailure(call: Call<EmprestimoResponseDTO>, t: Throwable) {
+                    Toast.makeText(
+                        this@ConfirmarReservaActivity,
+                        "Falha de conexão. Verifique sua internet.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    btnSim.isEnabled = true
+                    btnSim.text = "Sim"
+                }
+            })
+        }
+    }
+
+    private fun configurarBotaoCancelar() {
+        findViewById<TextView>(R.id.btnCancelar).setOnClickListener { finish() }
     }
 
     private fun configurarBottomNav() {
