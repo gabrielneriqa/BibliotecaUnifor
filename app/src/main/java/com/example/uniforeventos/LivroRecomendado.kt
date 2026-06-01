@@ -1,6 +1,7 @@
 package com.example.uniforeventos
 
 data class LivroRecomendado(
+    val id: Long,
     val titulo: String,
     val autor: String,
     val ano: String,

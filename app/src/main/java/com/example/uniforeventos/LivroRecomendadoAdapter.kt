@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 
 class LivroRecomendadoAdapter(
     private val livros: List<LivroRecomendado>,
-    private val verDetlahes: () -> Unit
+    private val verDetalhes: (LivroRecomendado) -> Unit
 ) : RecyclerView.Adapter<LivroRecomendadoAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivCapa: ImageView      = view.findViewById(R.id.ivCapaLivro)
-        val tvTitulo: TextView     = view.findViewById(R.id.tvTituloLivro)
-        val tvAutor: TextView      = view.findViewById(R.id.tvAutorLivro)
-        val tvAno: TextView        = view.findViewById(R.id.tvAnoLivro)
-        val tvCodigo: TextView     = view.findViewById(R.id.tvCodigoLivro)
+        val ivCapa: ImageView = view.findViewById(R.id.ivCapaLivro)
+        val tvTitulo: TextView = view.findViewById(R.id.tvTituloLivro)
+        val tvAutor: TextView = view.findViewById(R.id.tvAutorLivro)
+        val tvAno: TextView = view.findViewById(R.id.tvAnoLivro)
+        val tvCodigo: TextView = view.findViewById(R.id.tvCodigoLivro)
         val tvVerDetalhes: TextView = view.findViewById(R.id.tvVerDetalhes)
     }
 
@@ -35,7 +35,8 @@ class LivroRecomendadoAdapter(
         holder.tvAutor.text = "Autor: ${livro.autor}"
         holder.tvAno.text = "Ano: ${livro.ano}"
         holder.tvCodigo.text = "Código: ${livro.codigo}"
-        holder.tvVerDetalhes.setOnClickListener { verDetlahes() }
+
+        holder.tvVerDetalhes.setOnClickListener { verDetalhes(livro) }
     }
 
     override fun getItemCount(): Int = livros.size
