@@ -13,14 +13,19 @@ class OnboardingThreeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_onboarding_three)
 
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        val btnStart = findViewById<Button>(R.id.btnStart)
+        val btnSkip = findViewById<Button>(R.id.btnSkip)
+
         btnBack.setOnClickListener {
             finish()
         }
 
-        val btnStart = findViewById<Button>(R.id.btnStart)
-        btnStart.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+        val irParaLivros = {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finishAffinity()
         }
+
+        btnStart.setOnClickListener { irParaLivros() }
+        btnSkip.setOnClickListener { irParaLivros() }
     }
 }

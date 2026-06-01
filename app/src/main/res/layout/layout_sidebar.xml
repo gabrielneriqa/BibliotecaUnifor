@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="285dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#FFFFFF"
+    android:elevation="8dp"
+    android:orientation="vertical"
+    android:paddingTop="44dp">
+
+    <!-- Botão fechar (X) -->
+    <ImageView
+        android:id="@+id/btnFecharSidebar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_close" />
+
+    <!-- Avatar + usuário -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:background="@drawable/bg_round_avatar"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/autor" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Jorge Morais"
+                android:textColor="#1A1A1A"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="2423769"
+                android:textColor="#888888"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Divisor -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="#F0F0F0" />
+
+    <!-- Home -->
+    <LinearLayout
+        android:id="@+id/menuHome"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_home"
+            android:tint="#4A4A4A" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Home"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- Criar evento -->
+    <LinearLayout
+        android:id="@+id/menuCriarEvento"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_bookmark_outline"
+            android:tint="#4A4A4A" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Criar evento"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- Notificações -->
+    <LinearLayout
+        android:id="@+id/menuNotificacoes"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_notifications"
+            android:tint="#4A4A4A" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Notificações"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- Livros reservados -->
+    <LinearLayout
+        android:id="@+id/menuLivrosReservados"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_books"
+            android:tint="#4A4A4A" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Livros reservados"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- Eventos reservados -->
+    <LinearLayout
+        android:id="@+id/menuEventosReservados"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_bookmark_outline"
+            android:tint="#4A4A4A" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Eventos reservados"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- Perfil -->
+    <LinearLayout
+        android:id="@+id/menuPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_profile"
+            android:tint="#4A4A4A" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Perfil"
+            android:textColor="#1A1A1A"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

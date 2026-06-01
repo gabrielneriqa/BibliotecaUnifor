@@ -5,36 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F4F6"
     tools:context=".IdiomasActivity">
 
-    <!-- Topo -->
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:contentDescription="Voltar"
         android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Voltar"
         android:src="@drawable/ic_arrow_back"
-        android:tint="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#000000" />
 
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:fontFamily="@font/poppins_bold"
         android:text="Idioma"
         android:textColor="#111111"
         android:textSize="22sp"
-        android:fontFamily="@font/poppins_bold"
         app:layout_constraintBottom_toBottomOf="@id/ivBack"
         app:layout_constraintStart_toEndOf="@id/ivBack"
         app:layout_constraintTop_toTopOf="@id/ivBack" />
 
-    <!-- Lista de idiomas com seleção -->
     <RadioGroup
         android:id="@+id/rgIdiomas"
         android:layout_width="0dp"
@@ -54,14 +53,15 @@
             android:background="?attr/selectableItemBackground"
             android:buttonTint="#5A67F2"
             android:checked="true"
+            android:drawableEnd="@drawable/flag_br"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center_vertical"
-            android:layoutDirection="rtl"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Português"
             android:textColor="#222222"
             android:textDirection="locale"
-            android:fontFamily="@font/poppins_medium"
             android:textSize="18sp" />
 
         <View
@@ -75,14 +75,15 @@
             android:layout_height="56dp"
             android:background="?attr/selectableItemBackground"
             android:buttonTint="#5A67F2"
+            android:drawableEnd="@drawable/flag_br"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center_vertical"
-            android:layoutDirection="rtl"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Inglês"
             android:textColor="#222222"
             android:textDirection="locale"
-            android:fontFamily="@font/poppins_medium"
             android:textSize="18sp" />
 
         <View
@@ -96,14 +97,15 @@
             android:layout_height="56dp"
             android:background="?attr/selectableItemBackground"
             android:buttonTint="#5A67F2"
+            android:drawableEnd="@drawable/flag_br"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center_vertical"
-            android:layoutDirection="rtl"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Espanhol"
             android:textColor="#222222"
             android:textDirection="locale"
-            android:fontFamily="@font/poppins_medium"
             android:textSize="18sp" />
 
         <View
@@ -117,14 +119,15 @@
             android:layout_height="56dp"
             android:background="?attr/selectableItemBackground"
             android:buttonTint="#5A67F2"
+            android:drawableEnd="@drawable/flag_br"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center_vertical"
-            android:layoutDirection="rtl"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Francês"
             android:textColor="#222222"
             android:textDirection="locale"
-            android:fontFamily="@font/poppins_medium"
             android:textSize="18sp" />
 
         <View
@@ -133,73 +136,17 @@
             android:background="#DDDDDD" />
     </RadioGroup>
 
-    <!-- Barra inferior -->
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:background="#5668F5"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:weightSum="4"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_weight="1"
-            android:contentDescription="Home"
-            android:src="@android:drawable/ic_menu_view"
-            android:tint="#FFFFFF" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF"
-            />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_weight="1"
-            android:contentDescription="Notificações"
-            android:src="@android:drawable/ic_dialog_info"
-            android:tint="#FFFFFF" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF"
-            />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_weight="1"
-            android:contentDescription="Calendário"
-            android:src="@android:drawable/ic_menu_my_calendar"
-            android:tint="#FFFFFF" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_vertical"
-            android:background="#80FFFFFF"
-            />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="1"
-            android:contentDescription="Perfil"
-            android:src="@android:drawable/ic_menu_myplaces"
-            android:tint="#FFFFFF" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

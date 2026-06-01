@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,19 +14,59 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniforEventos">
         <activity
+            android:name=".ResultadosBuscaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetalhesEventoConfirmado"
+            android:exported="false" />
+        <activity
+            android:name=".MeusEventosConfirmados"
+            android:exported="false" />
+        <activity
+            android:name=".DateTimeFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FilterActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.UniforEventos">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RedefinirSenhaActivity" />
+        <activity android:name=".EmailEnviadoActivity" />
         <activity android:name=".OnboardingOneActivity" />
         <activity android:name=".OnboardingTwoActivity" />
         <activity android:name=".OnboardingThreeActivity" />
+        <activity android:name=".LivrosReservadosActivity" />
+        <activity android:name=".IdiomasActivity" />
+        <activity android:name=".DetalhesEventoActivity" />
+        <activity android:name=".CancelarEventoActivity" />
+        <activity android:name=".CreateEventActivity" />
+        <activity android:name=".ListaEventosActivity" />
+        <activity android:name=".EstenderEmprestimoActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".DetalhesLivroActivity" />
+        <activity android:name=".BibliotecaActivity" />
+        <activity android:name=".ConfirmarReservaActivity" />
+        <activity android:name=".ContaUsuarioActivity" />
+        <activity android:name=".LogoutActivity" />
+        <activity android:name=".SuporteActivity" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".ReservaConfirmada" />
+        <activity android:name=".EventoCriadoActivity" />
+        <activity android:name=".ConfirmarPresencaActivity" />
+        <activity android:name=".EditarEventoActivity" />
+        <activity android:name=".EdicaoEventoActivity" />
+        <activity android:name=".EventoCanceladoActivity" />
+        <activity android:name=".CancelarPresencaActivity" />
+        <activity android:name=".PresencaCanceladaActivity" />
     </application>
 
 </manifest>
