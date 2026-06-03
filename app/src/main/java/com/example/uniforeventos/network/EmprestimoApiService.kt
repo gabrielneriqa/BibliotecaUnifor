@@ -1,4 +1,4 @@
-package com.example.uniforeventos.network
+﻿package com.example.uniforeventos.network
 
 import com.example.uniforeventos.network.dto.EmprestimoRequestDTO
 import com.example.uniforeventos.network.dto.EmprestimoResponseDTO
@@ -7,7 +7,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface EmprestimoApiService {
-
     @POST("api/emprestimos")
     fun criar(@Body request: EmprestimoRequestDTO): Call<EmprestimoResponseDTO>
 
