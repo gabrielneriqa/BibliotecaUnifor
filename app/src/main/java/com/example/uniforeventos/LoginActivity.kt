@@ -3,11 +3,18 @@ package com.example.uniforeventos
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.uniforeventos.network.RetrofitClient
+import com.example.uniforeventos.network.dto.LoginRequestDTO
+import com.example.uniforeventos.network.dto.TokenUsuarioDTO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,9 +25,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         val etMatricula = findViewById<EditText>(R.id.etMatricula)
-        val etSenha = findViewById<EditText>(R.id.etSenha)
-        val ivOlho = findViewById<ImageView>(R.id.ivOlho)
-        val btnEntrar = findViewById<TextView>(R.id.btnEntrar)
+        val etSenha     = findViewById<EditText>(R.id.etSenha)
+        val ivOlho      = findViewById<ImageView>(R.id.ivOlho)
+        val btnEntrar   = findViewById<TextView>(R.id.btnEntrar)
         val btnLoginFake = findViewById<TextView>(R.id.btnLoginFake)
         val tvEsqueceuSenha = findViewById<TextView>(R.id.tvEsqueceuSenha)
 
@@ -34,28 +41,62 @@ class LoginActivity : AppCompatActivity() {
             etSenha.setSelection(etSenha.text.length)
         }
 
-        val acaoLogin = {
+        btnEntrar.setOnClickListener {
             val matricula = etMatricula.text.toString().trim()
             val senha = etSenha.text.toString().trim()
 
-            if (matricula == "1" && senha == "123") {
-                // 🔧 Substituir pelo id real retornado pelo endpoint de login quando implementado
-                SessionManager.salvarSessao(this, usuarioId = 1L, nome = "Usuário")
-                startActivity(Intent(this, OnboardingOneActivity::class.java))
-                finish()
-            } else {
-                Toast.makeText(this, "Matrícula ou senha inválidas.", Toast.LENGTH_SHORT).show()
+            if (matricula.isEmpty() || senha.isEmpty()) {
+                Toast.makeText(this, "Preencha todos os campos.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            btnEntrar.isEnabled = false
+            btnEntrar.text = "Entrando..."
+
+            val request = LoginRequestDTO(matricula = matricula, senha = senha)
+
+            RetrofitClient.usuarioApiService.loginPorMatricula(request)
+                .enqueue(object : Callback<TokenUsuarioDTO> {
+                    override fun onResponse(
+                        call: Call<TokenUsuarioDTO>,
+                        response: Response<TokenUsuarioDTO>
+                    ) {
+                        if (response.isSuccessful) {
+                            val token = response.body()!!
+                            SessionManager.salvarSessao(
+                                this@LoginActivity,
+                                usuarioId = token.usuarioId,
+                                nome = token.usuarioNome
+                            )
+                            startActivity(Intent(this@LoginActivity, OnboardingOneActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Matrícula ou senha inválidos.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            btnEntrar.isEnabled = true
+                            btnEntrar.text = "Entrar"
+                        }
+                    }
+
+                    override fun onFailure(call: Call<TokenUsuarioDTO>, t: Throwable) {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Falha de conexão. Verifique sua internet.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        btnEntrar.isEnabled = true
+                        btnEntrar.text = "Entrar"
+                    }
+                })
         }
 
-        val acaoLoginRapido = {
-            // 🔧 Login rápido também salva sessão com id provisório
+        btnLoginFake.setOnClickListener {
             SessionManager.salvarSessao(this, usuarioId = 1L, nome = "Usuário")
             startActivity(Intent(this, HomeActivity::class.java))
         }
-
-        btnEntrar.setOnClickListener { acaoLogin() }
-        btnLoginFake.setOnClickListener { acaoLoginRapido() }
 
         tvEsqueceuSenha.setOnClickListener {
             startActivity(Intent(this, RedefinirSenhaActivity::class.java))
