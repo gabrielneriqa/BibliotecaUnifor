@@ -204,7 +204,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
 
         val dto = EstenderEmprestimoDTO(fimEmprestimo = dataFim.toString())
 
-        RetrofitClient.instance.estender(emprestimoId, dto)
+        RetrofitClient.emprestimoApiService.estender(emprestimoId, dto)
             .enqueue(object : Callback<EmprestimoResponseDTO> {
                 override fun onResponse(
                     call: Call<EmprestimoResponseDTO>,
