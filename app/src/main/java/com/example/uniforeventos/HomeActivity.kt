@@ -2,6 +2,7 @@ package com.example.uniforeventos
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,28 +14,29 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uniforeventos.model.EventoResponse
-import com.example.uniforeventos.repository.EventoRepository
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.util.Log
-import androidx.lifecycle.lifecycleScope
 import com.example.uniforeventos.model.LivroResponse
+import com.example.uniforeventos.repository.EventoRepository
 import com.example.uniforeventos.repository.LivroRepository
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+
     private var eventos: List<Evento> = emptyList()
     private lateinit var eventoAdapter: EventoHomeAdapter
-    private val eventoRepository = EventoRepository()
 
+    private val eventoRepository = EventoRepository()
     private val livroRepository = LivroRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        carregarLivrosDaApi()
 
         drawerLayout = findViewById(R.id.drawerLayout)
 
@@ -96,11 +98,19 @@ class HomeActivity : AppCompatActivity() {
     private fun configurarEventos() {
         val rv = findViewById<RecyclerView>(R.id.rvEventos)
 
-        rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rv.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
 
         eventoAdapter = EventoHomeAdapter(
-            aoClicarNoEvento = { evento -> DetalhesEventoActivity.abrir(this, evento) },
-            aoClicarEmVerDetalhes = { evento -> DetalhesEventoActivity.abrir(this, evento) }
+            aoClicarNoEvento = { evento ->
+                DetalhesEventoActivity.abrir(this, evento)
+            },
+            aoClicarEmVerDetalhes = { evento ->
+                DetalhesEventoActivity.abrir(this, evento)
+            }
         )
 
         rv.adapter = eventoAdapter
@@ -120,12 +130,14 @@ class HomeActivity : AppCompatActivity() {
                 eventos = eventosConvertidos
                 eventoAdapter.submitList(eventosConvertidos)
 
-            } catch (e: Exception) {
+            } catch (exception: Exception) {
                 Toast.makeText(
                     this@HomeActivity,
-                    "Erro ao carregar eventos: ${e.message}",
+                    "Erro ao carregar eventos: ${exception.message}",
                     Toast.LENGTH_LONG
                 ).show()
+
+                Log.e("API_EVENTOS", "Erro ao carregar eventos", exception)
             }
         }
     }
@@ -176,6 +188,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun configurarFiltros() {
         val filter = findViewById<View>(R.id.btnFiltros)
+
         filter.setOnClickListener {
             startActivity(Intent(this, FilterActivity::class.java))
         }
@@ -189,39 +202,18 @@ class HomeActivity : AppCompatActivity() {
 
     private fun carregarListaEventos() {
         val botaoListarEventos = findViewById<View>(R.id.tvVerEventos)
+
         botaoListarEventos?.setOnClickListener {
-            val intent = Intent(this, ListaEventosActivity::class.java)
-            intent.putExtra("LISTA_EVENTOS", ArrayList(this.eventos))
-            startActivity(intent)
+            startActivity(Intent(this, ListaEventosActivity::class.java))
         }
     }
 
     private fun configurarVerBilioteca() {
         val btnBiblioteca = findViewById<TextView>(R.id.tvVerBiblioteca)
+
         btnBiblioteca.setOnClickListener {
             startActivity(Intent(this, BibliotecaActivity::class.java))
         }
-    }
-
-    private fun converterParaLivrosRecomendados(
-        livrosResponse: List<LivroResponse>
-    ): List<LivroRecomendado> {
-        return livrosResponse.map { livroResponse ->
-            LivroRecomendado(
-                id = livroResponse.id,
-                titulo = livroResponse.titulo,
-                autor = livroResponse.autor,
-                ano = livroResponse.ano ?: "Não informado",
-                codigo = livroResponse.codigo,
-                imagemResId = R.drawable.livro_mock
-            )
-        }
-    }
-
-    private fun abrirDetalhesLivro(livroId: Long) {
-        val intent = Intent(this, DetalhesLivroActivity::class.java)
-        intent.putExtra(DetalhesLivroActivity.EXTRA_LIVRO_ID, livroId)
-        startActivity(intent)
     }
 
     private fun configurarLivros() {
@@ -252,6 +244,7 @@ class HomeActivity : AppCompatActivity() {
                     Log.e("API_LIVROS", "Erro HTTP: ${response.code()}")
                     Log.e("API_LIVROS", "Erro body: ${response.errorBody()?.string()}")
                 }
+
             } catch (exception: Exception) {
                 Toast.makeText(
                     this@HomeActivity,
@@ -262,6 +255,27 @@ class HomeActivity : AppCompatActivity() {
                 Log.e("API_LIVROS", "Erro ao carregar livros", exception)
             }
         }
+    }
+
+    private fun converterParaLivrosRecomendados(
+        livrosResponse: List<LivroResponse>
+    ): List<LivroRecomendado> {
+        return livrosResponse.map { livroResponse ->
+            LivroRecomendado(
+                id = livroResponse.id,
+                titulo = livroResponse.titulo,
+                autor = livroResponse.autor,
+                ano = livroResponse.ano ?: "Não informado",
+                codigo = livroResponse.codigo,
+                imagemResId = R.drawable.livro_mock
+            )
+        }
+    }
+
+    private fun abrirDetalhesLivro(livroId: Long) {
+        val intent = Intent(this, DetalhesLivroActivity::class.java)
+        intent.putExtra(DetalhesLivroActivity.EXTRA_LIVRO_ID, livroId)
+        startActivity(intent)
     }
 
     private fun configurarBottomNav() {
@@ -297,46 +311,6 @@ class HomeActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
-        }
-    }
-
-    private fun atualizarLivrosNaTela(livros: List<LivroResponse>) {
-        Log.d("API_LIVROS", "Livros recebidos: ${livros.size}")
-
-        livros.forEach { livro ->
-            Log.d(
-                "API_LIVROS",
-                "Livro: ${livro.titulo} | Autor: ${livro.autor}"
-            )
-        }
-    }
-
-    private fun carregarLivrosDaApi() {
-        lifecycleScope.launch {
-            try {
-                val response = livroRepository.listarLivros()
-
-                if (response.isSuccessful) {
-                    val livros = response.body().orEmpty()
-
-                    atualizarLivrosNaTela(livros)
-                } else {
-                    Log.e("API_LIVROS", "Erro HTTP: ${response.code()}")
-                    Toast.makeText(
-                        this@HomeActivity,
-                        "Não foi possível carregar os livros.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            } catch (exception: Exception) {
-                Log.e("API_LIVROS", "Erro ao carregar livros", exception)
-
-                Toast.makeText(
-                    this@HomeActivity,
-                    "Erro de conexão ao carregar livros.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         }
     }
 }

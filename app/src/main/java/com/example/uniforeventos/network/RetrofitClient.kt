@@ -6,7 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import io.github.cdimascio.dotenv.dotenv
 
-
 object RetrofitClient {
 
     // 🔧 Substituir pela URL pública do backend quando disponível
@@ -27,31 +26,27 @@ object RetrofitClient {
         .addInterceptor(logging)
         .build()
 
-    val emprestimoApiService: EmprestimoApiService by lazy {
+    private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(EmprestimoApiService::class.java)
+    }
+
+    val emprestimoApiService: EmprestimoApiService by lazy {
+        retrofit.create(EmprestimoApiService::class.java)
     }
 
     val participacaoEventoApi: ParticipacaoEventoApi by lazy {
-        Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .client(httpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ParticipacaoEventoApi::class.java)
+        retrofit.create(ParticipacaoEventoApi::class.java)
     }
 
     val livroApi: LivroApi by lazy {
-        Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .client(httpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(LivroApi::class.java)
+        retrofit.create(LivroApi::class.java)
     }
 
+    val eventoApi: EventoApi by lazy {
+        retrofit.create(EventoApi::class.java)
+    }
 }
