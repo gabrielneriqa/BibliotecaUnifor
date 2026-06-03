@@ -58,7 +58,7 @@ class LivrosReservadosActivity : AppCompatActivity() {
         val usuarioId = SessionManager.getUsuarioId(this)
         if (usuarioId == -1L) return
 
-        RetrofitClient.instance.listarPorUsuario(usuarioId)
+        RetrofitClient.emprestimoApiService.listarPorUsuario(usuarioId)
             .enqueue(object : Callback<List<EmprestimoResponseDTO>> {
                 override fun onResponse(
                     call: Call<List<EmprestimoResponseDTO>>,

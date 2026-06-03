@@ -54,7 +54,7 @@ class ConfirmarReservaActivity : AppCompatActivity() {
                 livroId = livroId
             )
 
-            RetrofitClient.instance.criar(request).enqueue(object : Callback<EmprestimoResponseDTO> {
+            RetrofitClient.emprestimoApiService.criar(request).enqueue(object : Callback<EmprestimoResponseDTO> {
                 override fun onResponse(
                     call: Call<EmprestimoResponseDTO>,
                     response: Response<EmprestimoResponseDTO>

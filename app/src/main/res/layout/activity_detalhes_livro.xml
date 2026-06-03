@@ -173,7 +173,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Professora Ana"
+                            android:id="@+id/tvAutorLivro"
                             android:textColor="#1D1B34"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -201,7 +201,7 @@
                         android:layout_height="24dp"
                         android:background="@drawable/bg_chip_disponivel"
                         android:gravity="center"
-                        android:text="DISPONÍVEL"
+                        android:id="@+id/tvStatusDisponibilidade"
                         android:textAllCaps="true"
                         android:textColor="#FFFFFF"
                         android:textSize="10sp"
@@ -213,7 +213,7 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/bg_chip_disponivel"
                         android:gravity="center"
-                        android:text="4 CÓPIAS"
+                        android:id="@+id/tvCopiasDisponiveis"
                         android:textAllCaps="true"
                         android:textColor="#FFFFFF"
                         android:textSize="10sp"

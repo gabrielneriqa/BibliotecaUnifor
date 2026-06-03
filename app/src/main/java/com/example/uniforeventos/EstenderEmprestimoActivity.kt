@@ -36,7 +36,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
     private var currentDays: List<CalendarDay> = emptyList()
     private var currentYearMonth: YearMonth = YearMonth.now()
 
-    // 🔧 Substituir por datas reais vindas da API (datas já reservadas por outros)
+    // 🔧 Substituir por datas reais vindas da API
     private val reservedDates: Set<LocalDate> = setOf(
         LocalDate.of(2026, 4, 28),
         LocalDate.of(2026, 4, 29)
@@ -49,7 +49,6 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_estender_emprestimo)
 
         emprestimoId = intent.getLongExtra(EXTRA_EMPRESTIMO_ID, -1L)
-        val livroTitulo = intent.getStringExtra(EXTRA_LIVRO_TITULO) ?: ""
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerCalendar)
         val btnConfirmar = findViewById<View>(R.id.btnConfirmar)
@@ -107,8 +106,6 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         }
     }
 
-    // ─── Lógica de seleção de período ───────────────────────────────────────
-
     private fun handleDayClick(day: CalendarDay) {
         val date = day.date ?: return
         val s = startDate
@@ -141,8 +138,6 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         refreshCalendar()
     }
 
-    // ─── Calendário ─────────────────────────────────────────────────────────
-
     private fun carregarMes(yearMonth: YearMonth) {
         val nomeMes = yearMonth.month
             .getDisplayName(TextStyle.FULL, Locale("pt", "BR"))
@@ -171,7 +166,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
             val date = yearMonth.atDay(num)
 
             val isStart = date == startDate
-            val isEnd = date == endDate
+            val isEnd   = date == endDate
             val inRange = startDate != null && endDate != null
                     && date.isAfter(startDate) && date.isBefore(endDate)
 
@@ -192,8 +187,6 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
         return days
     }
 
-    // ─── Confirmação com API ─────────────────────────────────────────────────
-
     private fun confirmarExtensao(btnConfirmar: View) {
         val dataFim = endDate ?: startDate
 
@@ -211,7 +204,7 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
 
         val dto = EstenderEmprestimoDTO(fimEmprestimo = dataFim.toString())
 
-        RetrofitClient.instance.estender(emprestimoId, dto)
+        RetrofitClient.emprestimoApiService.estender(emprestimoId, dto)
             .enqueue(object : Callback<EmprestimoResponseDTO> {
                 override fun onResponse(
                     call: Call<EmprestimoResponseDTO>,
@@ -242,14 +235,14 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
 
     private fun showSuccessOverlay() {
         val overlay = findViewById<View>(R.id.successOverlay)
-        val imagem = findViewById<ImageView>(R.id.imgSuccess)
-        val texto = findViewById<TextView>(R.id.tvSuccessLabel)
+        val imagem  = findViewById<ImageView>(R.id.imgSuccess)
+        val texto   = findViewById<TextView>(R.id.tvSuccessLabel)
 
         overlay.alpha = 0f
         imagem.scaleX = 0f
         imagem.scaleY = 0f
-        imagem.alpha = 0f
-        texto.alpha = 0f
+        imagem.alpha  = 0f
+        texto.alpha   = 0f
 
         overlay.visibility = View.VISIBLE
 
