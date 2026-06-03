@@ -12,15 +12,24 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.util.Log
+import androidx.lifecycle.lifecycleScope
+import com.example.uniforeventos.model.LivroResponse
+import com.example.uniforeventos.repository.LivroRepository
+import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var eventos: List<Evento>
 
+    private val livroRepository = LivroRepository()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        carregarLivrosDaApi()
 
         drawerLayout = findViewById(R.id.drawerLayout)
 
@@ -164,17 +173,65 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun configurarLivros() {
-        // 🔧 Substituir por dados reais da API
-        val livros = listOf(
-            LivroRecomendado("Cultura da Inovação", "Daniel Isenberg", "2021", "023B21", R.drawable.livro_mock),
-            LivroRecomendado("Futuro do Trabalho e Educação", "Klaus Schwab", "2022", "034C22", R.drawable.livro_mock),
-            LivroRecomendado("Economia Comportamental na era da IA", "Richard Thaler", "2023", "045D23", R.drawable.livro_mock)
-        )
+    private fun converterParaLivrosRecomendados(
+        livrosResponse: List<LivroResponse>
+    ): List<LivroRecomendado> {
+        return livrosResponse.map { livroResponse ->
+            LivroRecomendado(
+                id = livroResponse.id,
+                titulo = livroResponse.titulo,
+                autor = livroResponse.autor,
+                ano = livroResponse.ano ?: "Não informado",
+                codigo = livroResponse.codigo,
+                imagemResId = R.drawable.livro_mock
+            )
+        }
+    }
 
+    private fun abrirDetalhesLivro(livroId: Long) {
+        val intent = Intent(this, DetalhesLivroActivity::class.java)
+        intent.putExtra(DetalhesLivroActivity.EXTRA_LIVRO_ID, livroId)
+        startActivity(intent)
+    }
+
+    private fun configurarLivros() {
         val rv = findViewById<RecyclerView>(R.id.rvLivros)
         rv.layoutManager = LinearLayoutManager(this)
-        rv.adapter = LivroRecomendadoAdapter(livros, verDetlahes = { DetalhesLivroActivity().abrir(this) })
+
+        lifecycleScope.launch {
+            try {
+                val response = livroRepository.listarLivros()
+
+                if (response.isSuccessful) {
+                    val livrosResponse = response.body().orEmpty()
+                    val livrosRecomendados = converterParaLivrosRecomendados(livrosResponse)
+
+                    rv.adapter = LivroRecomendadoAdapter(
+                        livros = livrosRecomendados,
+                        verDetalhes = { livro ->
+                            abrirDetalhesLivro(livro.id)
+                        }
+                    )
+                } else {
+                    Toast.makeText(
+                        this@HomeActivity,
+                        "Não foi possível carregar os livros.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    Log.e("API_LIVROS", "Erro HTTP: ${response.code()}")
+                    Log.e("API_LIVROS", "Erro body: ${response.errorBody()?.string()}")
+                }
+            } catch (exception: Exception) {
+                Toast.makeText(
+                    this@HomeActivity,
+                    "Erro de conexão ao carregar livros.",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                Log.e("API_LIVROS", "Erro ao carregar livros", exception)
+            }
+        }
     }
 
     private fun configurarBottomNav() {
@@ -206,6 +263,46 @@ class HomeActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+        }
+    }
+
+    private fun atualizarLivrosNaTela(livros: List<LivroResponse>) {
+        Log.d("API_LIVROS", "Livros recebidos: ${livros.size}")
+
+        livros.forEach { livro ->
+            Log.d(
+                "API_LIVROS",
+                "Livro: ${livro.titulo} | Autor: ${livro.autor}"
+            )
+        }
+    }
+
+    private fun carregarLivrosDaApi() {
+        lifecycleScope.launch {
+            try {
+                val response = livroRepository.listarLivros()
+
+                if (response.isSuccessful) {
+                    val livros = response.body().orEmpty()
+
+                    atualizarLivrosNaTela(livros)
+                } else {
+                    Log.e("API_LIVROS", "Erro HTTP: ${response.code()}")
+                    Toast.makeText(
+                        this@HomeActivity,
+                        "Não foi possível carregar os livros.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (exception: Exception) {
+                Log.e("API_LIVROS", "Erro ao carregar livros", exception)
+
+                Toast.makeText(
+                    this@HomeActivity,
+                    "Erro de conexão ao carregar livros.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

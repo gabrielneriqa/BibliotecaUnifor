@@ -2,7 +2,6 @@ package com.example.uniforeventos
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +19,15 @@ class ConfirmarReservaActivity : AppCompatActivity() {
         const val EXTRA_LIVRO_ID = "livro_id"
     }
 
+    private lateinit var btnSim: TextView
+    private lateinit var btnCancelar: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirmar_reserva)
+
+        btnSim = findViewById(R.id.btnSim)
+        btnCancelar = findViewById(R.id.btnCancelar)
 
         val livroId = intent.getLongExtra(EXTRA_LIVRO_ID, -1L)
 
@@ -54,7 +59,7 @@ class ConfirmarReservaActivity : AppCompatActivity() {
                 livroId = livroId
             )
 
-            RetrofitClient.instance.criar(request).enqueue(object : Callback<EmprestimoResponseDTO> {
+            RetrofitClient.emprestimoApiService.criar(request).enqueue(object : Callback<EmprestimoResponseDTO> {
                 override fun onResponse(
                     call: Call<EmprestimoResponseDTO>,
                     response: Response<EmprestimoResponseDTO>
