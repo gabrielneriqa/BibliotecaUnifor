@@ -66,7 +66,8 @@ class LoginActivity : AppCompatActivity() {
                             SessionManager.salvarSessao(
                                 this@LoginActivity,
                                 usuarioId = token.usuarioId,
-                                nome = token.usuarioNome
+                                nome = token.usuarioNome,
+                                usuarioToken =  token.token
                             )
                             startActivity(Intent(this@LoginActivity, OnboardingOneActivity::class.java))
                             finish()
@@ -94,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLoginFake.setOnClickListener {
-            SessionManager.salvarSessao(this, usuarioId = 1L, nome = "Usuário")
+            SessionManager.salvarSessao(this, usuarioId = 1L, nome = "Usuário", usuarioToken = "token-1")
             startActivity(Intent(this, HomeActivity::class.java))
         }
 

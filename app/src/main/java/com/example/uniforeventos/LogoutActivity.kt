@@ -19,7 +19,11 @@ class LogoutActivity: AppCompatActivity() {
 
     private fun sair() {
         findViewById<TextView>(R.id.btnSair).setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            SessionManager.limparSessao(this)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
     }
 
