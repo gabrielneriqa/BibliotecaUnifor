@@ -11,13 +11,19 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import com.google.android.material.card.MaterialCardView
+import androidx.lifecycle.lifecycleScope
+import com.example.uniforeventos.model.EventoResponse
+import com.example.uniforeventos.repository.EventoRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class DetalhesEventoActivity : AppCompatActivity() {
 
@@ -33,7 +39,10 @@ class DetalhesEventoActivity : AppCompatActivity() {
     private lateinit var textoCargoOrganizador: TextView
     private lateinit var textoDescricaoEvento: TextView
 
+    private val eventoRepository = EventoRepository()
+
     private var descricaoCompleta: String = ""
+    private var eventoId: Long = -1L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +50,8 @@ class DetalhesEventoActivity : AppCompatActivity() {
 
         inicializarViews()
         configurarCliqueDoBotaoVoltar()
-        preencherDadosDoEvento()
+        preencherDadosDoEventoRecebidosPorIntent()
+        carregarEventoPorId()
         confirmarPresenca()
         configurarBottomNav()
     }
@@ -66,7 +76,9 @@ class DetalhesEventoActivity : AppCompatActivity() {
         }
     }
 
-    private fun preencherDadosDoEvento() {
+    private fun preencherDadosDoEventoRecebidosPorIntent() {
+        eventoId = intent.getLongExtra(EXTRA_EVENTO_ID, -1L)
+
         val titulo = intent.getStringExtra(EXTRA_TITULO).orEmpty()
         val dataCompleta = intent.getStringExtra(EXTRA_DATA_COMPLETA).orEmpty()
         val horario = intent.getStringExtra(EXTRA_HORARIO).orEmpty()
@@ -88,14 +100,69 @@ class DetalhesEventoActivity : AppCompatActivity() {
 
         if (imagemEventoResId != 0) {
             imagemEvento.setImageResource(imagemEventoResId)
+        } else {
+            imagemEvento.setImageResource(R.drawable.img_evento_placeholder)
         }
 
         if (imagemOrganizadorResId != 0) {
             imagemOrganizador.setImageResource(imagemOrganizadorResId)
+        } else {
+            imagemOrganizador.setImageResource(R.drawable.img_avatar_1)
         }
 
         descricaoCompleta = descricao
         configurarDescricaoExpandivel()
+    }
+
+    private fun carregarEventoPorId() {
+        if (eventoId <= 0L) {
+            Toast.makeText(
+                this,
+                "Evento não encontrado.",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        lifecycleScope.launch {
+            try {
+                val eventoResponse = eventoRepository.buscarEventoPorId(eventoId)
+                preencherDadosDoEventoDaApi(eventoResponse)
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this@DetalhesEventoActivity,
+                    "Erro ao carregar detalhes do evento: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun preencherDadosDoEventoDaApi(evento: EventoResponse) {
+        textoTituloEvento.text = evento.titulo
+        textoDataEvento.text = formatarDataCompleta(evento.dataInicio)
+        textoHorarioEvento.text = evento.horario
+        textoLocalEvento.text = evento.local ?: "Local não informado"
+        textoEnderecoEvento.text = evento.endereco ?: "Endereço não informado"
+
+        textoNomeOrganizador.text = "UNIFOR"
+        textoCargoOrganizador.text = "Organizador"
+
+        imagemEvento.setImageResource(R.drawable.img_evento_placeholder)
+        imagemOrganizador.setImageResource(R.drawable.img_avatar_1)
+
+        descricaoCompleta = evento.descricao ?: ""
+        configurarDescricaoExpandivel()
+    }
+
+    private fun formatarDataCompleta(dataInicio: String): String {
+        val data = runCatching {
+            LocalDate.parse(dataInicio)
+        }.getOrNull()
+
+        return data?.format(
+            DateTimeFormatter.ofPattern("dd 'de' MMMM, yyyy", Locale("pt", "BR"))
+        ) ?: dataInicio
     }
 
     private fun configurarDescricaoExpandivel() {
@@ -142,12 +209,6 @@ class DetalhesEventoActivity : AppCompatActivity() {
         textoDescricaoEvento.text = spannableString
     }
 
-    private fun confirmarPresenca() {
-        findViewById<MaterialCardView>(R.id.btnConfirmarPresencaDetalhes).setOnClickListener {
-            startActivity(Intent(this, ConfirmarPresencaActivity::class.java))
-        }
-    }
-
     private fun aplicarDescricaoExpandida() {
         val textoFinal = "$descricaoCompleta Ler menos..."
         val spannableString = SpannableString(textoFinal)
@@ -176,7 +237,47 @@ class DetalhesEventoActivity : AppCompatActivity() {
         textoDescricaoEvento.text = spannableString
     }
 
+    private fun confirmarPresenca() {
+        findViewById<MaterialCardView>(R.id.btnConfirmarPresencaDetalhes).setOnClickListener {
+            val intent = Intent(this, ConfirmarPresencaActivity::class.java)
+            intent.putExtra(EXTRA_EVENTO_ID, eventoId)
+            startActivity(intent)
+        }
+    }
+
+    private fun configurarBottomNav() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_home
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+
+                R.id.nav_notifications -> {
+                    startActivity(Intent(this, NotificationActivity::class.java))
+                    true
+                }
+
+                R.id.nav_books -> {
+                    startActivity(Intent(this, LivrosReservadosActivity::class.java))
+                    true
+                }
+
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
     companion object {
+        private const val EXTRA_EVENTO_ID = "extra_evento_id"
         private const val EXTRA_TITULO = "extra_titulo"
         private const val EXTRA_DATA_COMPLETA = "extra_data_completa"
         private const val EXTRA_HORARIO = "extra_horario"
@@ -192,6 +293,7 @@ class DetalhesEventoActivity : AppCompatActivity() {
 
         fun abrir(contexto: Context, evento: Evento) {
             val intent = Intent(contexto, DetalhesEventoActivity::class.java).apply {
+                putExtra(EXTRA_EVENTO_ID, evento.id)
                 putExtra(EXTRA_TITULO, evento.titulo)
                 putExtra(EXTRA_DATA_COMPLETA, evento.dataCompleta)
                 putExtra(EXTRA_HORARIO, evento.horario)
@@ -207,32 +309,4 @@ class DetalhesEventoActivity : AppCompatActivity() {
             contexto.startActivity(intent)
         }
     }
-
-    private fun configurarBottomNav() {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.selectedItemId = R.id.nav_home
-
-        bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    true
-                }
-                R.id.nav_notifications -> {
-                    startActivity(Intent(this, NotificationActivity::class.java))
-                    true
-                }
-                R.id.nav_books -> {
-                    startActivity(Intent(this, LivrosReservadosActivity::class.java))
-                    true
-                }
-                R.id.nav_profile -> {
-                    startActivity(Intent(this, ContaUsuarioActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
 }

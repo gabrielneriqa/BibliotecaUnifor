@@ -1,10 +1,10 @@
 package com.example.uniforeventos.model
 
-data class EventoRequest(
-    val titulo: String,
+data class EventoPatchRequest(
+    val titulo: String?,
     val descricao: String?,
-    val dataInicio: String,
-    val horario: String,
+    val dataInicio: String?,
+    val horario: String?,
     val local: String?,
     val endereco: String?,
     val imagemUrl: String?,
