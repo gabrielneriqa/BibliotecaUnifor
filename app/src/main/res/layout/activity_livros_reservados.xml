@@ -148,6 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header"
+            android:layout_above="@id/bottomNav"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:padding="16dp">
@@ -184,93 +185,25 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <!-- CARD -->
-            <LinearLayout
+            <!-- ESTADO VAZIO -->
+            <TextView
+                android:id="@+id/tvSemLivros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Nenhum livro reservado"
+                android:textColor="#7A7A7A"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <!-- LISTA DE EMPRÉSTIMOS -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerLivrosReservados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="#FFFFFF"
-                android:elevation="2dp"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="72dp"
-                    android:layout_height="100dp"
-                    android:contentDescription="Capa do livro"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/livro_mock"
-                    app:shapeAppearanceOverlay="@style/RoundedBookCover" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Harry Potter"
-                            android:textColor="#2B2B2B"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/btnEstenderEmprestimo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_extend_button"
-                            android:gravity="center"
-                            android:paddingStart="12dp"
-                            android:paddingTop="7dp"
-                            android:paddingEnd="12dp"
-                            android:paddingBottom="7dp"
-                            android:text="Estender empréstimo"
-                            android:textColor="#FF6B6B"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Autor: Martha Gabriel"
-                        android:textColor="#7A7A7A"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ano: 2021"
-                        android:textColor="#7A7A7A"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Código: TEC-10327"
-                        android:textColor="#7A7A7A"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Devolução: 10/03/2026"
-                        android:textColor="#7A7A7A"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
+                android:clipToPadding="false" />
 
         </LinearLayout>
 
