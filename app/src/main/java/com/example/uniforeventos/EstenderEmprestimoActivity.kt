@@ -195,6 +195,11 @@ class EstenderEmprestimoActivity : AppCompatActivity() {
             return
         }
 
+        if (!dataFim.isAfter(LocalDate.now())) {
+            Toast.makeText(this, "A data de devolução deve ser pelo menos amanhã.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         if (emprestimoId == -1L) {
             Toast.makeText(this, "Empréstimo inválido.", Toast.LENGTH_SHORT).show()
             return

@@ -49,4 +49,8 @@ object RetrofitClient {
     val eventoApi: EventoApi by lazy {
         retrofit.create(EventoApi::class.java)
     }
+    
+    val usuarioApiService: UsuarioApiService by lazy {
+        retrofit.create(UsuarioApiService::class.java)
+    }
 }
